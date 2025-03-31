@@ -6,13 +6,14 @@ public class usuario {
     private int id;
     private int idade;
     private String nivel;
+    private String email;
 
-    public int getIdade() {
-        return idade;
+    public String getEmail() {
+        return email;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNivel() {
@@ -21,6 +22,14 @@ public class usuario {
 
     public void setNivel(String nivel) {
         this.nivel = nivel;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
     public String getSenha() {
