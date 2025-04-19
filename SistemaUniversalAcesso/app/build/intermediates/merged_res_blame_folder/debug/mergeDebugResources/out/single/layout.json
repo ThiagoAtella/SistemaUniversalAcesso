@@ -1,13 +1,5 @@
 [
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/cadastro.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/cadastro.xml"
-    },
-    {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/menu_cliente.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/menu_cliente.xml"
-    },
-    {
         "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/activity_main.xml",
         "source": "com.example.sistemauniversalacesso.app-main-38:/layout/activity_main.xml"
     },
@@ -16,15 +8,35 @@
         "source": "com.example.sistemauniversalacesso.app-main-38:/layout/dialog_editar_usuario.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/menu_admin.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/menu_admin.xml"
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\login.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\login.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/login.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/login.xml"
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\item_usuario.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\item_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\menu_admin.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\menu_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\cadastro.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\cadastro.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\menu_cliente.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\menu_cliente.xml"
     },
     {
         "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/item_usuario.xml",
         "source": "com.example.sistemauniversalacesso.app-main-38:/layout/item_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\dialog_editar_usuario.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\dialog_editar_usuario.xml"
     }
 ]

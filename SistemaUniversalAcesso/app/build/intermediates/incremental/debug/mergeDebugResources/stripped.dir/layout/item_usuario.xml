@@ -40,7 +40,5 @@
             android:textColor="@android:color/white"
             android:backgroundTint="#111"
             android:textSize="18sp"/>
-
     </LinearLayout>
-
 </LinearLayout>

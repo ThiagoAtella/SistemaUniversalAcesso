@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sistemauniversalacesso.utils.PasswordUtils;
 import com.example.sistemauniversalacesso.utils.UsuarioAdapter;
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.ActivityMainBinding;
@@ -98,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
 
-                    Usuario novoUsuario = new Usuario(nome, email, senha);
+                    String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
+                    Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada);
+
 
                     new Thread(() -> {
                         db.UsuarioDao().inserir(novoUsuario);
@@ -117,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
         dialogBinding.etNome.setText(usuario.getNome());
         dialogBinding.etEmail.setText(usuario.getEmail());
-        dialogBinding.etSenha.setText(usuario.getSenha());
 
         new AlertDialog.Builder(this)
                 .setTitle("Editar Usuário")
@@ -125,7 +127,12 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Salvar", (dialog, which) -> {
                     usuario.setNome(dialogBinding.etNome.getText().toString());
                     usuario.setEmail(dialogBinding.etEmail.getText().toString());
-                    usuario.setSenha(dialogBinding.etSenha.getText().toString());
+
+                    String novaSenha = dialogBinding.etSenha.getText().toString();
+                    if (!novaSenha.isEmpty()) {
+                        String senhaCriptografada = PasswordUtils.generateSecurePassword(novaSenha);
+                        usuario.setSenha(senhaCriptografada);
+                    }
 
                     new Thread(() -> {
                         db.UsuarioDao().update(usuario);
