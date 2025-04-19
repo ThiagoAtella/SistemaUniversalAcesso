@@ -6,4 +6,4 @@ O SUA funcionará por meio da identificação de códigos QR, uma opção que of
 Para executar o código e testar suas funcionalidades, basta:
 - Clonar o repositório do Github de nosso projeto: https://github.com/ThiagoAtella/SistemaUniversalAcesso.git
 - Ou abrir no Android Studio
-A versão atual do projeto é 1.0
+
