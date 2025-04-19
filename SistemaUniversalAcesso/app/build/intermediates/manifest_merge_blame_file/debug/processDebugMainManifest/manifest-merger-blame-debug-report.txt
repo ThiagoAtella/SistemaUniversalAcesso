@@ -20,57 +20,57 @@
 15-->[androidx.core:core:1.13.0] C:\Users\thiag\Downloads\jogodaforca_V2\JogodaForcaV2\JogodaForcaV2\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:5:5-28:19
+17-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:5:5-28:19
 18        android:allowBackup="true"
-18-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:6:9-35
+18-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:6:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 19-->[androidx.core:core:1.13.0] C:\Users\thiag\Downloads\jogodaforca_V2\JogodaForcaV2\JogodaForcaV2\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
 20        android:dataExtractionRules="@xml/data_extraction_rules"
-20-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:7:9-65
+20-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:7:9-65
 21        android:debuggable="true"
 22        android:extractNativeLibs="false"
 23        android:fullBackupContent="@xml/backup_rules"
-23-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:8:9-54
+23-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:8:9-54
 24        android:icon="@mipmap/ic_launcher"
-24-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:9:9-43
+24-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:9:9-43
 25        android:label="@string/app_name"
-25-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:10:9-41
+25-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:10:9-41
 26        android:roundIcon="@mipmap/ic_launcher_round"
-26-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:11:9-54
+26-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:11:9-54
 27        android:supportsRtl="true"
-27-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:12:9-35
+27-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:12:9-35
 28        android:testOnly="true"
 29        android:theme="@style/Theme.SistemaUniversalAcesso" >
-29-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:13:9-60
+29-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:13:9-60
 30        <activity
-30-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:15:9-23:20
+30-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:15:9-23:20
 31            android:name="com.example.sistemauniversalacesso.telas.login_activity"
-31-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:16:13-49
+31-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:16:13-49
 32            android:exported="true" >
-32-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:17:13-36
+32-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:17:13-36
 33            <intent-filter>
-33-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:18:13-22:29
+33-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:18:13-22:29
 34                <action android:name="android.intent.action.MAIN" />
-34-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:19:17-69
-34-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:19:25-66
+34-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:19:17-69
+34-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:19:25-66
 35
 36                <category android:name="android.intent.category.LAUNCHER" />
-36-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:21:17-77
-36-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:21:27-74
+36-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:21:17-77
+36-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:21:27-74
 37            </intent-filter>
 38        </activity>
 39        <activity
-39-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:9-25:39
+39-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:9-25:39
 40            android:name="com.example.sistemauniversalacesso.telas.cadastro_activity"
-40-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:19-58
+40-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:19-58
 41            android:exported="false" />
-41-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:25:13-37
+41-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:25:13-37
 42        <activity
-42-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:26:9-27:39
+42-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:26:9-27:39
 43            android:name="com.example.sistemauniversalacesso.telas.MainActivity"
-43-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:26:19-53
+43-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:26:19-53
 44            android:exported="false" />
-44-->C:\Users\thiag\Downloads\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:27:13-37
+44-->C:\Users\thiag\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:27:13-37
 45
 46        <service
 46-->[androidx.room:room-runtime:2.6.1] C:\Users\thiag\Downloads\jogodaforca_V2\JogodaForcaV2\JogodaForcaV2\caches\8.9\transforms\b3da94eed2c52e99e28e18e870653487\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63

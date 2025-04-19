@@ -23,6 +23,8 @@ layout cadastro
 layout dialog_editar_usuario
 layout item_usuario
 layout login
+layout menu_admin
+layout menu_cliente
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

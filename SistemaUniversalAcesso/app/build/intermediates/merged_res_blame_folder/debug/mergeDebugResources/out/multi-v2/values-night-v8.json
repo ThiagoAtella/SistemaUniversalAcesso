@@ -1,8 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sistemauniversalacesso.app-mergeDebugResources-2:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.sistemauniversalacesso.app-mergeDebugResources-34:/values-night-v8/values-night-v8.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\thiag\\OneDrive\\Documentos\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "102",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "334"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "180"
+                    }
+                },
                 {
                     "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\caches\\8.9\\transforms\\d330e4cd0e54c93bbc6762f27a4947c3\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
@@ -35,25 +54,6 @@
                         "startOffsets": "817,892,1003,1092,1193,1300,1407,1506,1613,1716,1843,1931,2055,2157,2259,2375,2477,2591,2719,2835,2957,3093,3213,3347,3467,3579,3794,3911,4035,4165,4287,4425,4559,4675",
                         "endColumns": "74,110,88,100,106,106,98,106,102,126,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
                         "endOffsets": "887,998,1087,1188,1295,1402,1501,1608,1711,1838,1926,2050,2152,2254,2370,2472,2586,2714,2830,2952,3088,3208,3342,3462,3574,3700,3906,4030,4160,4282,4420,4554,4670,4790"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thiag\\Downloads\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\src\\main\\res\\values-night\\themes.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "102",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "334"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "180"
                     }
                 }
             ]
