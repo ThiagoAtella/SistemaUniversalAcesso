@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_cadastro.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\cadastro.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_login.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\login.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "com.example.sistemauniversalacesso.app-debug-4:/layout_cadastro.xml.flat",
+        "source": "com.example.sistemauniversalacesso.app-main-6:/layout/cadastro.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_dialog_editar_usuario.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\dialog_editar_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_item_usuario.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\item_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_menu_cliente.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\menu_cliente.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\layout_menu_admin.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\layout\\menu_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-4:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-6:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    }
+]

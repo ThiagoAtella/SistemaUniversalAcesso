@@ -1,5 +1,6 @@
 package com.example.sistemauniversalacesso.telas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import com.example.sistemauniversalacesso.databinding.CadastroBinding;
 import com.example.sistemauniversalacesso.databinding.ActivityMainBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.database.usuarioDAO;
+import com.example.sistemauniversalacesso.utils.PasswordUtils;
 
 
 public class cadastro_activity extends AppCompatActivity {
@@ -25,6 +27,7 @@ public class cadastro_activity extends AppCompatActivity {
         db = SistemaDatabase.getInstance(this);
 
         binding.btnCadastrar.setOnClickListener(v -> realizarCadastro());
+        binding.btnVoltar.setOnClickListener(view -> voltarLogin());
     }
 
     private void realizarCadastro() {
@@ -47,13 +50,20 @@ public class cadastro_activity extends AppCompatActivity {
                 return;
             }
 
-            Usuario novoUsuario = new Usuario(nome, email, senha);
+            String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
+            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada);
             db.UsuarioDao().inserir(novoUsuario);
+
 
             runOnUiThread(() -> {
                 Toast.makeText(this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
                 finish();
             });
         }).start();
+    }
+    private void voltarLogin(){
+    Intent intent = new Intent(cadastro_activity.this, login_activity.class);
+    startActivity(intent);
+    finish();
     }
 }

@@ -1,7 +1,6 @@
 package com.example.sistemauniversalacesso.telas;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,10 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.LoginBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
+import com.example.sistemauniversalacesso.utils.PasswordUtils;
+import com.example.sistemauniversalacesso.utils.SessionManager;
+
+import java.util.List;
 
 public class login_activity extends AppCompatActivity {
     private LoginBinding binding;
     private SistemaDatabase db;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,18 +25,26 @@ public class login_activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = SistemaDatabase.getInstance(this);
+        session = new SessionManager(this);
+
+        // Auto-login se já estiver logado
+        if (session.isLogado()) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            return;
+        }
 
         // Botão de login
-        binding.btnLogin.setOnClickListener(v -> RealizarLogin());
+        binding.btnLogin.setOnClickListener(v -> realizarLogin());
 
-        // CADASTRO -----
+        // Ir para cadastro
         binding.btnCadastro.setOnClickListener(v -> {
             Intent intent = new Intent(login_activity.this, cadastro_activity.class);
             startActivity(intent);
         });
     }
 
-    private void RealizarLogin() {
+    private void realizarLogin() {
         String email = binding.etEmail.getText().toString();
         String senha = binding.etSenha.getText().toString();
 
@@ -42,15 +54,15 @@ public class login_activity extends AppCompatActivity {
         }
 
         new Thread(() -> {
-            Usuario usuario = db.UsuarioDao().login(email, senha);
+            List<Usuario> usuarios = db.UsuarioDao().loadALLEmail(email);
+            Usuario usuario = (usuarios.isEmpty()) ? null : usuarios.get(0);
 
             runOnUiThread(() -> {
-                if (usuario != null) {
-                    // Salvar login
-                    SharedPreferences prefs = getSharedPreferences("BikeAppPrefs", MODE_PRIVATE);
-                    prefs.edit().putBoolean("Logado", true).apply();
+                if (usuario != null && PasswordUtils.verifyPassword(senha, usuario.getSenha())) {
+                    // Salvar sessão
+                    session.salvarSessao(usuario.getNome(), usuario.getEmail());
 
-                    // Ir para MainActivity
+                    // Ir para a MainActivity
                     Intent intent = new Intent(login_activity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

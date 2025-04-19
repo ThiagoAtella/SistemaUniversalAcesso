@@ -1,9 +1,8 @@
 package com.example.sistemauniversalacesso.telas;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +13,17 @@ import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.ActivityMainBinding;
 import com.example.sistemauniversalacesso.databinding.DialogEditarUsuarioBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
+import com.example.sistemauniversalacesso.utils.SessionManager;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private ActivityMainBinding binding;
     private SistemaDatabase db;
     private UsuarioAdapter adapter;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = SistemaDatabase.getInstance(this);
-        binding.recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this));
+        session = new SessionManager(this);
 
+        // Proteção extra: se não estiver logado, volta pro login
+        if (!session.isLogado()) {
+            startActivity(new Intent(this, login_activity.class));
+            finish();
+            return;
+        }
+
+        // Boas-vindas
+        String nomeUsuario = session.getNome();
+        Toast.makeText(this, "Bem-vindo(a), " + nomeUsuario, Toast.LENGTH_SHORT).show();
+
+        // Setup da RecyclerView
+        binding.recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this));
         carregarUsuarios();
+
+        // Botão adicionar
+        binding.btnAdicionar.setOnClickListener(v -> mostrarDialogAdicionarUsuario());
+
+        // Botão logout
+        binding.btnLogout.setOnClickListener(v -> {
+            session.logout();
+            startActivity(new Intent(MainActivity.this, login_activity.class));
+            finish();
+        });
     }
 
     private void carregarUsuarios() {
@@ -55,6 +80,36 @@ public class MainActivity extends AppCompatActivity {
                 binding.recyclerUsuarios.setAdapter(adapter);
             });
         }).start();
+    }
+
+    private void mostrarDialogAdicionarUsuario() {
+        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
+
+        new AlertDialog.Builder(this)
+                .setTitle("Adicionar Usuário")
+                .setView(dialogBinding.getRoot())
+                .setPositiveButton("Salvar", (dialog, which) -> {
+                    String nome = dialogBinding.etNome.getText().toString();
+                    String email = dialogBinding.etEmail.getText().toString();
+                    String senha = dialogBinding.etSenha.getText().toString();
+
+                    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                        Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Usuario novoUsuario = new Usuario(nome, email, senha);
+
+                    new Thread(() -> {
+                        db.UsuarioDao().inserir(novoUsuario);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                            carregarUsuarios();
+                        });
+                    }).start();
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void mostrarDialogEdicao(Usuario usuario) {

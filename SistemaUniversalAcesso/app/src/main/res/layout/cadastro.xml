@@ -70,6 +70,16 @@
             android:backgroundTint="#111"
             android:textSize="18sp"
             android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Voltar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#111"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
 </LinearLayout>
