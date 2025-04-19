@@ -3020,6 +3020,8 @@ int drawable ic_call_decline 0x7f07008c
 int drawable ic_call_decline_low 0x7f07008d
 int drawable ic_clear_black_24 0x7f07008e
 int drawable ic_clock_black_24dp 0x7f07008f
+int drawable ic_config 0x7f0700e7
+int drawable ic_group 0x7f0700e8
 int drawable ic_keyboard_black_24dp 0x7f070090
 int drawable ic_launcher_background 0x7f070091
 int drawable ic_launcher_foreground 0x7f070092
@@ -3030,6 +3032,7 @@ int drawable ic_mtrl_checked_circle 0x7f070096
 int drawable ic_mtrl_chip_checked_black 0x7f070097
 int drawable ic_mtrl_chip_checked_circle 0x7f070098
 int drawable ic_mtrl_chip_close_circle 0x7f070099
+int drawable ic_person 0x7f0700e9
 int drawable ic_search_black_24 0x7f07009a
 int drawable indeterminate_static 0x7f07009b
 int drawable m3_avd_hide_password 0x7f07009c
@@ -3090,6 +3093,7 @@ int drawable mtrl_switch_thumb_unchecked_pressed 0x7f0700d2
 int drawable mtrl_switch_track 0x7f0700d3
 int drawable mtrl_switch_track_decoration 0x7f0700d4
 int drawable mtrl_tabs_default_indicator 0x7f0700d5
+int drawable nav_background_curved 0x7f0700ea
 int drawable navigation_empty_icon 0x7f0700d6
 int drawable notification_action_background 0x7f0700d7
 int drawable notification_bg 0x7f0700d8
@@ -3204,6 +3208,7 @@ int id below 0x7f08005d
 int id bestChoice 0x7f08005e
 int id blocking 0x7f08005f
 int id bottom 0x7f080060
+int id bottomNavigationView 0x7f08020a
 int id bounce 0x7f080061
 int id bounceBoth 0x7f080062
 int id bounceEnd 0x7f080063
@@ -3424,6 +3429,9 @@ int id mtrl_picker_text_input_range_start 0x7f080139
 int id mtrl_picker_title_text 0x7f08013a
 int id mtrl_view_tag_bottom_padding 0x7f08013b
 int id multiply 0x7f08013c
+int id nav_config 0x7f08020b
+int id nav_perfil 0x7f08020c
+int id nav_usuarios 0x7f08020d
 int id navigation_bar_item_active_indicator_view 0x7f08013d
 int id navigation_bar_item_icon_container 0x7f08013e
 int id navigation_bar_item_icon_view 0x7f08013f
@@ -3829,6 +3837,7 @@ int layout select_dialog_item_material 0x7f0b006e
 int layout select_dialog_multichoice_material 0x7f0b006f
 int layout select_dialog_singlechoice_material 0x7f0b0070
 int layout support_simple_spinner_dropdown_item 0x7f0b0071
+int menu menu_bottom_nav 0x7f130000
 int mipmap ic_launcher 0x7f0d0000
 int mipmap ic_launcher_round 0x7f0d0001
 int plurals mtrl_badge_content_description 0x7f0e0000

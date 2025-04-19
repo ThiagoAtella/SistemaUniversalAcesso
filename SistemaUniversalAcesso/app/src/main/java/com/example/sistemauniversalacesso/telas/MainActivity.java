@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.utils.PasswordUtils;
 import com.example.sistemauniversalacesso.utils.UsuarioAdapter;
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
@@ -59,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, login_activity.class));
             finish();
         });
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_usuarios) {
+                Toast.makeText(this, "Usuários", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.nav_perfil) {
+                Toast.makeText(this, "Perfil (em breve)", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.nav_config) {
+                Toast.makeText(this, "Configurações (em breve)", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            return false;
+        });
+
     }
 
     private void carregarUsuarios() {
