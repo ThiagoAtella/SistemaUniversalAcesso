@@ -4,11 +4,10 @@ package com.example.sistemauniversalacesso.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.sistemauniversalacesso.R;
@@ -25,22 +24,13 @@ public final class ActivityMainBinding implements ViewBinding {
   public final BottomNavigationView bottomNavigationView;
 
   @NonNull
-  public final Button btnAdicionar;
-
-  @NonNull
-  public final Button btnLogout;
-
-  @NonNull
-  public final RecyclerView recyclerUsuarios;
+  public final FrameLayout fragmentContainer;
 
   private ActivityMainBinding(@NonNull LinearLayout rootView,
-      @NonNull BottomNavigationView bottomNavigationView, @NonNull Button btnAdicionar,
-      @NonNull Button btnLogout, @NonNull RecyclerView recyclerUsuarios) {
+      @NonNull BottomNavigationView bottomNavigationView, @NonNull FrameLayout fragmentContainer) {
     this.rootView = rootView;
     this.bottomNavigationView = bottomNavigationView;
-    this.btnAdicionar = btnAdicionar;
-    this.btnLogout = btnLogout;
-    this.recyclerUsuarios = recyclerUsuarios;
+    this.fragmentContainer = fragmentContainer;
   }
 
   @Override
@@ -76,26 +66,14 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnAdicionar;
-      Button btnAdicionar = ViewBindings.findChildViewById(rootView, id);
-      if (btnAdicionar == null) {
+      id = R.id.fragmentContainer;
+      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContainer == null) {
         break missingId;
       }
 
-      id = R.id.btnLogout;
-      Button btnLogout = ViewBindings.findChildViewById(rootView, id);
-      if (btnLogout == null) {
-        break missingId;
-      }
-
-      id = R.id.recyclerUsuarios;
-      RecyclerView recyclerUsuarios = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerUsuarios == null) {
-        break missingId;
-      }
-
-      return new ActivityMainBinding((LinearLayout) rootView, bottomNavigationView, btnAdicionar,
-          btnLogout, recyclerUsuarios);
+      return new ActivityMainBinding((LinearLayout) rootView, bottomNavigationView,
+          fragmentContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

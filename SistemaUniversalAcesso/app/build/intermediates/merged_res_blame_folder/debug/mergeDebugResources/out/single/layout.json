@@ -1,7 +1,7 @@
 [
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/activity_main.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/activity_main.xml"
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\fragment_config.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\fragment_config.xml"
     },
     {
         "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\login.xml",
@@ -20,8 +20,20 @@
         "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\cadastro.xml"
     },
     {
+        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_usuarios.xml",
+        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_usuarios.xml"
+    },
+    {
         "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\activity_main.xml",
         "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_config.xml",
+        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\fragment_usuarios.xml",
+        "source": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-38:\\layout\\fragment_usuarios.xml"
     },
     {
         "merged": "C:\\Users\\thiag\\Downloads\\jogodaforca_V2\\JogodaForcaV2\\JogodaForcaV2\\daemon\\8.9\\com.example.sistemauniversalacesso.app-mergeDebugResources-35:\\layout\\menu_cliente.xml",

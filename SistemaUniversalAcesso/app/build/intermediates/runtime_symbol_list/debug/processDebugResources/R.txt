@@ -3323,6 +3323,7 @@ int id fixed 0x7f0800cf
 int id flip 0x7f0800d0
 int id floating 0x7f0800d1
 int id forever 0x7f0800d2
+int id fragmentContainer 0x7f08020e
 int id fragment_container_view_tag 0x7f0800d3
 int id frost 0x7f0800d4
 int id fullscreen_header 0x7f0800d5
@@ -3770,6 +3771,8 @@ int layout design_navigation_menu_item 0x7f0b002b
 int layout design_text_input_end_icon 0x7f0b002c
 int layout design_text_input_start_icon 0x7f0b002d
 int layout dialog_editar_usuario 0x7f0b002e
+int layout fragment_config 0x7f0b0072
+int layout fragment_usuarios 0x7f0b0073
 int layout ime_base_split_test_activity 0x7f0b002f
 int layout ime_secondary_split_test_activity 0x7f0b0030
 int layout item_usuario 0x7f0b0031
@@ -3793,8 +3796,6 @@ int layout material_time_input 0x7f0b0042
 int layout material_timepicker 0x7f0b0043
 int layout material_timepicker_dialog 0x7f0b0044
 int layout material_timepicker_textinput_display 0x7f0b0045
-int layout menu_admin 0x7f0b0046
-int layout menu_cliente 0x7f0b0047
 int layout mtrl_alert_dialog 0x7f0b0048
 int layout mtrl_alert_dialog_actions 0x7f0b0049
 int layout mtrl_alert_dialog_title 0x7f0b004a

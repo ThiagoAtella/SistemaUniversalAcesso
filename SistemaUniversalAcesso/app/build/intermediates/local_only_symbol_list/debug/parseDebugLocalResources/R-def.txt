@@ -20,6 +20,7 @@ id btnVoltar
 id etEmail
 id etNome
 id etSenha
+id fragmentContainer
 id nav_config
 id nav_perfil
 id nav_usuarios
@@ -29,10 +30,10 @@ id tvNome
 layout activity_main
 layout cadastro
 layout dialog_editar_usuario
+layout fragment_config
+layout fragment_usuarios
 layout item_usuario
 layout login
-layout menu_admin
-layout menu_cliente
 menu menu_bottom_nav
 mipmap ic_launcher
 mipmap ic_launcher_round
