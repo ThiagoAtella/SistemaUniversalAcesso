@@ -22,9 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UsuariosFragment extends Fragment {
-
+    // binding do fragmentUsuarios
     private FragmentUsuariosBinding binding;
+    // banco de dados
     private SistemaDatabase db;
+    //adapter do recyclerView
     private UsuarioAdapter adapter;
 
     public UsuariosFragment() {}
@@ -32,11 +34,12 @@ public class UsuariosFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentUsuariosBinding.inflate(inflater, container, false);
+        // inicializa a instância do banco de dados
         db = SistemaDatabase.getInstance(requireContext());
-
         binding.recyclerUsuarios.setLayoutManager(new LinearLayoutManager(requireContext()));
+        // carrega os usuários que estão salvos no banco
         carregarUsuarios();
-
+        // configura o botão para adicionar usuários
         binding.btnAdicionar.setOnClickListener(v -> mostrarDialogAdicionarUsuario());
 
         return binding.getRoot();
@@ -45,8 +48,8 @@ public class UsuariosFragment extends Fragment {
     private void carregarUsuarios() {
         new Thread(() -> {
             Usuario[] usuariosArray = db.UsuarioDao().loadAllUsers();
-            List<Usuario> usuarios = Arrays.asList(usuariosArray);
-
+            List<Usuario> usuarios = Arrays.asList(usuariosArray); //obtém os usuarios pelo array do room
+            // atualiza a interface com as informações recebidas
             requireActivity().runOnUiThread(() -> {
                 adapter = new UsuarioAdapter(usuarios, new UsuarioAdapter.UsuarioCallback() {
                     @Override
@@ -63,10 +66,9 @@ public class UsuariosFragment extends Fragment {
             });
         }).start();
     }
-
+    //exibe um diálogo para adicionar um usuário
     private void mostrarDialogAdicionarUsuario() {
-        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
-
+        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater()); // reuso do dialogEditarUsuario
         new AlertDialog.Builder(requireContext())
                 .setTitle("Adicionar Usuário")
                 .setView(dialogBinding.getRoot())
@@ -74,30 +76,30 @@ public class UsuariosFragment extends Fragment {
                     String nome = dialogBinding.etNome.getText().toString();
                     String email = dialogBinding.etEmail.getText().toString();
                     String senha = dialogBinding.etSenha.getText().toString();
-
+                    // verificação de preenchimento
                     if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                         Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
+                    // criptografia da senha
                     String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
                     Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada);
-
+                    // insere o usuário
                     new Thread(() -> {
                         db.UsuarioDao().inserir(novoUsuario);
                         requireActivity().runOnUiThread(() -> {
                             Toast.makeText(requireContext(), "Usuário adicionado", Toast.LENGTH_SHORT).show();
-                            carregarUsuarios();
+                            carregarUsuarios(); // atualiza a lista novamente
                         });
                     }).start();
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
-
+    //dialogo para editar o usuário (parecido com o anterior)
     private void mostrarDialogEdicao(Usuario usuario) {
-        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
-
+        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater()); // binding do dialogo ao editar
+        // coloca os dados do usuário no editText
         dialogBinding.etNome.setText(usuario.getNome());
         dialogBinding.etEmail.setText(usuario.getEmail());
 
@@ -124,7 +126,7 @@ public class UsuariosFragment extends Fragment {
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
-
+    // exclui um usuário do banco de dados
     private void deletarUsuario(Usuario usuario) {
         new Thread(() -> {
             db.UsuarioDao().delete(usuario);
@@ -134,7 +136,6 @@ public class UsuariosFragment extends Fragment {
             });
         }).start();
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

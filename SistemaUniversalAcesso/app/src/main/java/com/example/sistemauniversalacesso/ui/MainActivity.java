@@ -15,7 +15,9 @@ import com.example.sistemauniversalacesso.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    // View binding da main
     private ActivityMainBinding binding;
+    // gerenciador de sessão do usuário
     private SessionManager session;
 
     @Override
@@ -25,25 +27,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         session = new SessionManager(this);
-
+        //verifica se o usuário já está logado
         if (!session.isLogado()) {
-            startActivity(new Intent(this, login_activity.class));
+            startActivity(new Intent(this, login_activity.class)); // inicia a tela do login caso não esteja logado
             finish();
             return;
         }
-
+        //toast de entrada com nome do usuário
         String nomeUsuario = session.getNome();
         Toast.makeText(this, "Bem-vindo(a), " + nomeUsuario, Toast.LENGTH_SHORT).show();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(binding.fragmentContainer.getId(), new UsuariosFragment())
-                    .commit();
+                    .commit(); // define o fragment usuario como o padrão ao iniciar a main
         }
-
+        // configuração para o clique do bottomNavigation
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
-
+            // troca de fragment ao clicar no bottomNavigation
             if (item.getItemId() == R.id.nav_usuarios) {
                 fragment = new UsuariosFragment();
             } else if (item.getItemId() == R.id.nav_perfil) {
