@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sistemauniversalacesso.databinding.FragmentConfigBinding;
-import com.example.sistemauniversalacesso.telas.login_activity;
+import com.example.sistemauniversalacesso.ui.login_activity;
 import com.example.sistemauniversalacesso.utils.SessionManager;
 
 public class ConfigFragment extends Fragment {

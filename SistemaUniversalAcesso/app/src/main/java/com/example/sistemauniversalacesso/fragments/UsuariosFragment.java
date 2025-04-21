@@ -16,7 +16,7 @@ import com.example.sistemauniversalacesso.databinding.DialogEditarUsuarioBinding
 import com.example.sistemauniversalacesso.databinding.FragmentUsuariosBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.PasswordUtils;
-import com.example.sistemauniversalacesso.utils.UsuarioAdapter;
+import com.example.sistemauniversalacesso.adapters.UsuarioAdapter;
 
 import java.util.Arrays;
 import java.util.List;
