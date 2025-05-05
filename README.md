@@ -1,3 +1,4 @@
+![LogodoSUA (1)](https://github.com/user-attachments/assets/51677d10-376e-4833-95a8-46a4542888d2)
 # Sistema Universal de Acesso (SUA) 🚀
 
 Bem-vindo ao **Sistema Universal de Acesso LTDA (SUA)**, um projeto desenvolvido como Trabalho de Conclusão de Curso (TCC) para oferecer uma solução moderna e segura de controle de acesso a ambientes específicos, como refeitórios, auditórios e estacionamentos. O SUA substitui métodos tradicionais, como chaves físicas e listas em papel, por uma aplicação mobile que utiliza **códigos QR** para garantir eficiência, segurança e rastreabilidade.
@@ -21,9 +22,10 @@ Os métodos tradicionais de controle de acesso são ineficientes, suscetíveis a
 ## ✨ Funcionalidades Atuais
 
 - Cadastro de usuários com CPF, nome, e-mail e nível de acesso.
-- Login seguro no sistema.
+- Login seguro e criptografado no sistema.
 - CRUD (Create, Read, Update, Delete) de usuários via banco de dados Room.
-- Interface inicial para gerenciamento de acessos.
+- Interface inicial para gerenciamento de acessos que usa uma BottomNavigationView para alternar entre fragments(usuários e configurações)
+- Sessão de Usuário através de SharedPreferences, que o mantém logado e permite o logout.
 
 ## 🔮 Funcionalidades Futuras
 
