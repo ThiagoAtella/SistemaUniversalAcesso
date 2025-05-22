@@ -1,6 +1,7 @@
 package com.example.sistemauniversalacesso.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class login_activity extends AppCompatActivity {
         }
 
         // Botão de login
-        binding.btnLogin.setOnClickListener(v -> realizarLogin());
+        binding.btnLogin.setOnClickListener(v -> RealizarLogin());
 
         // Ir para cadastro
         binding.btnCadastro.setOnClickListener(v -> {
@@ -44,12 +45,32 @@ public class login_activity extends AppCompatActivity {
         });
     }
 
-    private void realizarLogin() {
-        String email = binding.etEmail.getText().toString();
+    private boolean isEmailValido(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isSenhaSegura(String senha) {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return senha.matches(regex);
+    }
+
+
+    private void RealizarLogin() {
+        String email = binding.etEmail.getText().toString().trim();
         String senha = binding.etSenha.getText().toString();
 
         if (email.isEmpty() || senha.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isEmailValido(email)) {
+            binding.etEmail.setError("Email inválido");
+            return;
+        }
+
+        if (!isSenhaSegura(senha)) {
+            binding.etSenha.setError("Senha não atende aos critérios mínimos.");
             return;
         }
 
@@ -59,10 +80,9 @@ public class login_activity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 if (usuario != null && PasswordUtils.verifyPassword(senha, usuario.getSenha())) {
-                    // Salvar sessão
-                    session.salvarSessao(usuario.getNome(), usuario.getEmail());
+                    SharedPreferences prefs = getSharedPreferences("SUAAppPrefs", MODE_PRIVATE);
+                    prefs.edit().putBoolean("Logado", true).apply();
 
-                    // Ir para a MainActivity
                     Intent intent = new Intent(login_activity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
