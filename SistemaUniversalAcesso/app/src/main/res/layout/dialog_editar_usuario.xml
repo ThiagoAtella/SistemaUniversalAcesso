@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText android:id="@+id/etNome"
+        android:hint="Nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText android:id="@+id/etEmail"
+        android:hint="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText android:id="@+id/etSenha"
+        android:hint="Senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+</LinearLayout>
