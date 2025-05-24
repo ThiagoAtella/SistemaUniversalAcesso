@@ -13,11 +13,14 @@ public class Usuario {
     private String email;
     @ColumnInfo(name = "senha")
     private String senha;
+    @ColumnInfo(name = "nível")
+    private String nivel;
 
-    public Usuario(String nome, String email, String senha){
+    public Usuario(String nome, String email, String senha, String nivel){
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.nivel = nivel;
     }
 
     public int getId(){
@@ -49,5 +52,12 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNivel() {
+        return nivel;
+    }
+    public void setNivel(String nivel) {
+        this.email = nivel;
     }
 }

@@ -81,15 +81,27 @@ public class login_activity extends AppCompatActivity {
             runOnUiThread(() -> {
                 if (usuario != null && PasswordUtils.verifyPassword(senha, usuario.getSenha())) {
                     SharedPreferences prefs = getSharedPreferences("SUAAppPrefs", MODE_PRIVATE);
-                    prefs.edit().putBoolean("Logado", true).apply();
+                    prefs.edit()
+                            .putBoolean("Logado", true)
+                            .putString("Email", usuario.getEmail())
+                            .putString("Nome", usuario.getNome())
+                            .apply();
 
-                    Intent intent = new Intent(login_activity.this, MainActivity.class);
-                    startActivity(intent);
+                    // Verifica o nível de acesso
+                    if (usuario.getNivel().equalsIgnoreCase("adm")) {
+                        Intent intent = new Intent(login_activity.this, MainActivityAdm.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(login_activity.this, MainActivityUsuario.class);
+                        startActivity(intent);
+                    }
+
                     finish();
                 } else {
                     Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
                 }
             });
-        }).start();
-    }
+    });
 }
+}
+

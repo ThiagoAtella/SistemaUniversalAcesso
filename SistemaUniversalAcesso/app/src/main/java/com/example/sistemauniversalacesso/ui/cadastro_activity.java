@@ -2,6 +2,7 @@ package com.example.sistemauniversalacesso.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,14 @@ public class cadastro_activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = SistemaDatabase.getInstance(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                new String[]{"usuario", "adm"}
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spNivel.setAdapter(adapter);
 
         binding.btnCadastrar.setOnClickListener(v -> realizarCadastro());
         binding.btnVoltar.setOnClickListener(v -> voltarLogin());
@@ -52,6 +61,7 @@ public class cadastro_activity extends AppCompatActivity {
         String nome = binding.etNome.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String senha = binding.etSenha.getText().toString();
+        String nivel = binding.spNivel.getSelectedItem().toString();
 
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -80,7 +90,7 @@ public class cadastro_activity extends AppCompatActivity {
 
             // Criptografar senha e salvar no banco
             String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
-            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada);
+            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, nivel);
             db.UsuarioDao().inserir(novoUsuario);
 
             runOnUiThread(() -> {
