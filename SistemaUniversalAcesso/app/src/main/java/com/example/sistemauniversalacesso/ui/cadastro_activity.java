@@ -80,7 +80,7 @@ public class cadastro_activity extends AppCompatActivity {
 
             // Criptografar senha e salvar no banco
             String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
-            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, "user");
+            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, "adm");
             db.UsuarioDao().inserir(novoUsuario);
 
             runOnUiThread(() -> {

@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.databinding.ActivityMainBinding;
 import com.example.sistemauniversalacesso.fragments.ConfigFragment;
-import com.example.sistemauniversalacesso.fragments.UsuariosFragment;
 import com.example.sistemauniversalacesso.fragments.TelaRestritaFragment;
+import com.example.sistemauniversalacesso.fragments.UsuariosFragment;
 import com.example.sistemauniversalacesso.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         String nivel = session.getNivel();
 
         if ("user".equals(nivel)) {
-            // 🚫 Bloqueia tudo e carrega apenas tela restrita
             getSupportFragmentManager().beginTransaction()
                     .replace(binding.fragmentContainer.getId(), new TelaRestritaFragment())
                     .commit();
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // 👑 Se for admin, carrega o fragment padrão (ex: usuários)
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(binding.fragmentContainer.getId(), new UsuariosFragment())
