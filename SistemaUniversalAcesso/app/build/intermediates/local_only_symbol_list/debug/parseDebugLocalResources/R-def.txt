@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array niveis_usuario
 color black
 color white
 drawable ic_config
@@ -25,12 +26,15 @@ id nav_config
 id nav_perfil
 id nav_usuarios
 id recyclerUsuarios
+id spNivel
 id tvEmail
+id tvMensagem
 id tvNome
 layout activity_main
 layout cadastro
 layout dialog_editar_usuario
 layout fragment_config
+layout fragment_tela_restrita
 layout fragment_usuarios
 layout item_usuario
 layout login

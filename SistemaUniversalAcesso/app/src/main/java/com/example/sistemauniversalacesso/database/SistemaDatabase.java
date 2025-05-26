@@ -9,7 +9,7 @@ import androidx.room.Room;
 import com.example.sistemauniversalacesso.models.Usuario;
 
 
-@Database(entities = {Usuario.class}, version = 1, exportSchema = true)
+@Database(entities = {Usuario.class}, version = 2, exportSchema = true)
 public abstract class SistemaDatabase extends  RoomDatabase{
     private static SistemaDatabase instancia;
 

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.DialogEditarUsuarioBinding;
 import com.example.sistemauniversalacesso.databinding.FragmentUsuariosBinding;
@@ -76,43 +77,59 @@ public class UsuariosFragment extends Fragment {
                     String nome = dialogBinding.etNome.getText().toString();
                     String email = dialogBinding.etEmail.getText().toString();
                     String senha = dialogBinding.etSenha.getText().toString();
-                    // verificação de preenchimento
+                    String nivel = dialogBinding.spNivel.getSelectedItem().toString();
+
                     if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                         Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    // criptografia da senha
+
                     String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
-                    Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada);
-                    // insere o usuário
+                    Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, nivel);
+
                     new Thread(() -> {
                         db.UsuarioDao().inserir(novoUsuario);
                         requireActivity().runOnUiThread(() -> {
                             Toast.makeText(requireContext(), "Usuário adicionado", Toast.LENGTH_SHORT).show();
-                            carregarUsuarios(); // atualiza a lista novamente
+                            carregarUsuarios();
                         });
                     }).start();
                 })
+
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
     //dialogo para editar o usuário (parecido com o anterior)
     private void mostrarDialogEdicao(Usuario usuario) {
-        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater()); // binding do dialogo ao editar
-        // coloca os dados do usuário no editText
+        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
+
+        // Preenche os campos com os dados atuais do usuário
         dialogBinding.etNome.setText(usuario.getNome());
         dialogBinding.etEmail.setText(usuario.getEmail());
 
+        // Define o nível atual no Spinner
+        String[] niveis = getResources().getStringArray(R.array.niveis_usuario);
+        for (int i = 0; i < niveis.length; i++) {
+            if (niveis[i].equals(usuario.getNivel())) {
+                dialogBinding.spNivel.setSelection(i);
+                break;
+            }
+        }
+
+        // Cria o AlertDialog com o layout customizado
         new AlertDialog.Builder(requireContext())
                 .setTitle("Editar Usuário")
                 .setView(dialogBinding.getRoot())
                 .setPositiveButton("Salvar", (dialog, which) -> {
+                    // Atualiza os dados com o que foi digitado
                     usuario.setNome(dialogBinding.etNome.getText().toString());
                     usuario.setEmail(dialogBinding.etEmail.getText().toString());
+                    usuario.setNivel(dialogBinding.spNivel.getSelectedItem().toString());
 
                     String novaSenha = dialogBinding.etSenha.getText().toString();
                     if (!novaSenha.isEmpty()) {
-                        usuario.setSenha(PasswordUtils.generateSecurePassword(novaSenha));
+                        String senhaCriptografada = PasswordUtils.generateSecurePassword(novaSenha);
+                        usuario.setSenha(senhaCriptografada);
                     }
 
                     new Thread(() -> {
@@ -126,6 +143,7 @@ public class UsuariosFragment extends Fragment {
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
+
     // exclui um usuário do banco de dados
     private void deletarUsuario(Usuario usuario) {
         new Thread(() -> {

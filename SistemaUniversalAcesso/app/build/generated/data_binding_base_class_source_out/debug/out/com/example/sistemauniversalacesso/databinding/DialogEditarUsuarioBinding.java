@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -28,12 +29,16 @@ public final class DialogEditarUsuarioBinding implements ViewBinding {
   @NonNull
   public final EditText etSenha;
 
+  @NonNull
+  public final Spinner spNivel;
+
   private DialogEditarUsuarioBinding(@NonNull LinearLayout rootView, @NonNull EditText etEmail,
-      @NonNull EditText etNome, @NonNull EditText etSenha) {
+      @NonNull EditText etNome, @NonNull EditText etSenha, @NonNull Spinner spNivel) {
     this.rootView = rootView;
     this.etEmail = etEmail;
     this.etNome = etNome;
     this.etSenha = etSenha;
+    this.spNivel = spNivel;
   }
 
   @Override
@@ -81,7 +86,14 @@ public final class DialogEditarUsuarioBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DialogEditarUsuarioBinding((LinearLayout) rootView, etEmail, etNome, etSenha);
+      id = R.id.spNivel;
+      Spinner spNivel = ViewBindings.findChildViewById(rootView, id);
+      if (spNivel == null) {
+        break missingId;
+      }
+
+      return new DialogEditarUsuarioBinding((LinearLayout) rootView, etEmail, etNome, etSenha,
+          spNivel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,9 +1,9 @@
 package com.example.sistemauniversalacesso.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
@@ -15,6 +15,7 @@ import com.example.sistemauniversalacesso.utils.SessionManager;
 import java.util.List;
 
 public class login_activity extends AppCompatActivity {
+
     private LoginBinding binding;
     private SistemaDatabase db;
     private SessionManager session;
@@ -35,10 +36,7 @@ public class login_activity extends AppCompatActivity {
             return;
         }
 
-        // Botão de login
         binding.btnLogin.setOnClickListener(v -> RealizarLogin());
-
-        // Ir para cadastro
         binding.btnCadastro.setOnClickListener(v -> {
             Intent intent = new Intent(login_activity.this, cadastro_activity.class);
             startActivity(intent);
@@ -53,7 +51,6 @@ public class login_activity extends AppCompatActivity {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return senha.matches(regex);
     }
-
 
     private void RealizarLogin() {
         String email = binding.etEmail.getText().toString().trim();
@@ -80,12 +77,13 @@ public class login_activity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 if (usuario != null && PasswordUtils.verifyPassword(senha, usuario.getSenha())) {
-                    SharedPreferences prefs = getSharedPreferences("SUAAppPrefs", MODE_PRIVATE);
-                    prefs.edit().putBoolean("Logado", true).apply();
 
-                    Intent intent = new Intent(login_activity.this, MainActivity.class);
-                    startActivity(intent);
+                    // ✅ Salvando sessão com nome, email e nível
+                    session.salvarSessao(usuario.getNome(), usuario.getEmail(), usuario.getNivel());
+
+                    startActivity(new Intent(login_activity.this, MainActivity.class));
                     finish();
+
                 } else {
                     Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
                 }

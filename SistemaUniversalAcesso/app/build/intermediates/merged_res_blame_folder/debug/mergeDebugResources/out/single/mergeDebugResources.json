@@ -60,6 +60,10 @@
         "source": "com.example.sistemauniversalacesso.app-main-38:/drawable/ic_launcher_foreground.xml"
     },
     {
+        "merged": "com.example.sistemauniversalacesso.app-debug-36:/layout_fragment_tela_restrita.xml.flat",
+        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_tela_restrita.xml"
+    },
+    {
         "merged": "com.example.sistemauniversalacesso.app-debug-36:/layout_dialog_editar_usuario.xml.flat",
         "source": "com.example.sistemauniversalacesso.app-main-38:/layout/dialog_editar_usuario.xml"
     },

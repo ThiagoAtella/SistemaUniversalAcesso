@@ -38,7 +38,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `usuarios` (`id`,`nome`,`email`,`senha`) VALUES (nullif(?, 0),?,?,?)";
+        return "INSERT OR ABORT INTO `usuarios` (`id`,`nome`,`email`,`senha`,`nivel`) VALUES (nullif(?, 0),?,?,?,?)";
       }
 
       @Override
@@ -58,6 +58,11 @@ public final class usuarioDAO_Impl implements usuarioDAO {
           statement.bindNull(4);
         } else {
           statement.bindString(4, entity.getSenha());
+        }
+        if (entity.getNivel() == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, entity.getNivel());
         }
       }
     };
@@ -77,7 +82,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `usuarios` SET `id` = ?,`nome` = ?,`email` = ?,`senha` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `usuarios` SET `id` = ?,`nome` = ?,`email` = ?,`senha` = ?,`nivel` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -98,7 +103,12 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           statement.bindString(4, entity.getSenha());
         }
-        statement.bindLong(5, entity.getId());
+        if (entity.getNivel() == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, entity.getNivel());
+        }
+        statement.bindLong(6, entity.getId());
       }
     };
   }
@@ -150,6 +160,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final Usuario[] _tmpResult = new Usuario[_cursor.getCount()];
       int _index = 0;
       while (_cursor.moveToNext()) {
@@ -172,7 +183,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _item.setId(_tmpId);
@@ -213,6 +230,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item_1;
@@ -234,7 +252,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _item_1 = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _item_1 = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _item_1.setId(_tmpId);
@@ -270,6 +294,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final Usuario _result;
       if (_cursor.moveToFirst()) {
         final String _tmpNome;
@@ -290,7 +315,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _result = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _result = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _result.setId(_tmpId);
@@ -321,6 +352,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
@@ -342,7 +374,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _item.setId(_tmpId);
@@ -372,6 +410,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
@@ -393,7 +432,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _item.setId(_tmpId);
@@ -423,6 +468,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfNome = CursorUtil.getColumnIndexOrThrow(_cursor, "nome");
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
+      final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
@@ -444,7 +490,13 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha);
+        final String _tmpNivel;
+        if (_cursor.isNull(_cursorIndexOfNivel)) {
+          _tmpNivel = null;
+        } else {
+          _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
+        }
+        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _item.setId(_tmpId);

@@ -28,7 +28,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.SistemaUniversalAcesso" >
         <activity
-            android:name="com.example.sistemauniversalacesso.telas.login_activity"
+            android:name="com.example.sistemauniversalacesso.ui.login_activity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.sistemauniversalacesso.telas.cadastro_activity"
+            android:name="com.example.sistemauniversalacesso.ui.cadastro_activity"
             android:exported="false" />
         <activity
-            android:name="com.example.sistemauniversalacesso.telas.MainActivity"
+            android:name="com.example.sistemauniversalacesso.ui.MainActivity"
             android:exported="false" />
 
         <service

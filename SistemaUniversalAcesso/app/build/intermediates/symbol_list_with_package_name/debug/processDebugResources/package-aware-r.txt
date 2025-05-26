@@ -77,6 +77,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array niveis_usuario
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -3540,6 +3541,7 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id spNivel
 id spacer
 id special_effects_controller_view_tag
 id spline
@@ -3613,6 +3615,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvEmail
+id tvMensagem
 id tvNome
 id unchecked
 id uniform
@@ -3773,6 +3776,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_editar_usuario
 layout fragment_config
+layout fragment_tela_restrita
 layout fragment_usuarios
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
