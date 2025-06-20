@@ -29,6 +29,9 @@ public class Usuario {
         this.nivel = nivel;
     }
 
+    public Usuario() {} // para firebase
+
+
     // Getters e Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -44,4 +47,16 @@ public class Usuario {
 
     public String getNivel() { return nivel; }
     public void setNivel(String nivel) { this.nivel = nivel; }
+
+    private String firebaseId;
+
+    public String getFirebaseId() {
+        return firebaseId;
+    }
+
+    public void setFirebaseId(String firebaseId) {
+        this.firebaseId = firebaseId;
+    }
 }
+
+

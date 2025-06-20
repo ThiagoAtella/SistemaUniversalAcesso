@@ -38,7 +38,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `usuarios` (`id`,`nome`,`email`,`senha`,`nivel`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR ABORT INTO `usuarios` (`id`,`nome`,`email`,`senha`,`nivel`,`firebaseId`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
@@ -63,6 +63,11 @@ public final class usuarioDAO_Impl implements usuarioDAO {
           statement.bindNull(5);
         } else {
           statement.bindString(5, entity.getNivel());
+        }
+        if (entity.getFirebaseId() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, entity.getFirebaseId());
         }
       }
     };
@@ -82,7 +87,7 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `usuarios` SET `id` = ?,`nome` = ?,`email` = ?,`senha` = ?,`nivel` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `usuarios` SET `id` = ?,`nome` = ?,`email` = ?,`senha` = ?,`nivel` = ?,`firebaseId` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -108,7 +113,12 @@ public final class usuarioDAO_Impl implements usuarioDAO {
         } else {
           statement.bindString(5, entity.getNivel());
         }
-        statement.bindLong(6, entity.getId());
+        if (entity.getFirebaseId() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, entity.getFirebaseId());
+        }
+        statement.bindLong(7, entity.getId());
       }
     };
   }
@@ -161,38 +171,50 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final Usuario[] _tmpResult = new Usuario[_cursor.getCount()];
       int _index = 0;
       while (_cursor.moveToNext()) {
         final Usuario _item;
+        _item = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _item.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _item.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _item.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _item.setId(_tmpId);
+        _item.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _item.setFirebaseId(_tmpFirebaseId);
         _tmpResult[_index] = _item;
         _index++;
       }
@@ -231,37 +253,49 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item_1;
+        _item_1 = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item_1.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _item_1.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _item_1.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _item_1.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _item_1 = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _item_1.setId(_tmpId);
+        _item_1.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _item_1.setFirebaseId(_tmpFirebaseId);
         _result.add(_item_1);
       }
       return _result;
@@ -295,36 +329,48 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final Usuario _result;
       if (_cursor.moveToFirst()) {
+        _result = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _result.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _result.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _result.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _result.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _result = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _result.setId(_tmpId);
+        _result.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _result.setFirebaseId(_tmpFirebaseId);
       } else {
         _result = null;
       }
@@ -353,37 +399,49 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
+        _item = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _item.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _item.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _item.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _item.setId(_tmpId);
+        _item.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _item.setFirebaseId(_tmpFirebaseId);
         _result.add(_item);
       }
       return _result;
@@ -411,37 +469,49 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
+        _item = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _item.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _item.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _item.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _item.setId(_tmpId);
+        _item.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _item.setFirebaseId(_tmpFirebaseId);
         _result.add(_item);
       }
       return _result;
@@ -469,37 +539,49 @@ public final class usuarioDAO_Impl implements usuarioDAO {
       final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
       final int _cursorIndexOfSenha = CursorUtil.getColumnIndexOrThrow(_cursor, "senha");
       final int _cursorIndexOfNivel = CursorUtil.getColumnIndexOrThrow(_cursor, "nivel");
+      final int _cursorIndexOfFirebaseId = CursorUtil.getColumnIndexOrThrow(_cursor, "firebaseId");
       final List<Usuario> _result = new ArrayList<Usuario>(_cursor.getCount());
       while (_cursor.moveToNext()) {
         final Usuario _item;
+        _item = new Usuario();
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item.setId(_tmpId);
         final String _tmpNome;
         if (_cursor.isNull(_cursorIndexOfNome)) {
           _tmpNome = null;
         } else {
           _tmpNome = _cursor.getString(_cursorIndexOfNome);
         }
+        _item.setNome(_tmpNome);
         final String _tmpEmail;
         if (_cursor.isNull(_cursorIndexOfEmail)) {
           _tmpEmail = null;
         } else {
           _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
         }
+        _item.setEmail(_tmpEmail);
         final String _tmpSenha;
         if (_cursor.isNull(_cursorIndexOfSenha)) {
           _tmpSenha = null;
         } else {
           _tmpSenha = _cursor.getString(_cursorIndexOfSenha);
         }
+        _item.setSenha(_tmpSenha);
         final String _tmpNivel;
         if (_cursor.isNull(_cursorIndexOfNivel)) {
           _tmpNivel = null;
         } else {
           _tmpNivel = _cursor.getString(_cursorIndexOfNivel);
         }
-        _item = new Usuario(_tmpNome,_tmpEmail,_tmpSenha,_tmpNivel);
-        final int _tmpId;
-        _tmpId = _cursor.getInt(_cursorIndexOfId);
-        _item.setId(_tmpId);
+        _item.setNivel(_tmpNivel);
+        final String _tmpFirebaseId;
+        if (_cursor.isNull(_cursorIndexOfFirebaseId)) {
+          _tmpFirebaseId = null;
+        } else {
+          _tmpFirebaseId = _cursor.getString(_cursorIndexOfFirebaseId);
+        }
+        _item.setFirebaseId(_tmpFirebaseId);
         _result.add(_item);
       }
       return _result;

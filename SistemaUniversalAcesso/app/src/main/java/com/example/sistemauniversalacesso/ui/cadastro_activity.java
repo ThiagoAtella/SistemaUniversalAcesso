@@ -3,11 +3,11 @@ package com.example.sistemauniversalacesso.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.CadastroBinding;
+import com.example.sistemauniversalacesso.database.FirebaseService;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.PasswordUtils;
 
@@ -28,26 +28,15 @@ public class cadastro_activity extends AppCompatActivity {
         binding.btnVoltar.setOnClickListener(v -> voltarLogin());
     }
 
-    /**
-     * Valida email com base no padrão Android
-     */
     private boolean isEmailValido(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    /**
-     * Valida senha forte (Regex):
-     * - Mínimo 8 caracteres
-     * - Pelo menos 1 maiúscula, 1 minúscula, 1 número e 1 símbolo
-     */
     private boolean isSenhaSegura(String senha) {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return senha.matches(regex);
     }
 
-    /**
-     * Realiza o cadastro do usuário após validações
-     */
     private void realizarCadastro() {
         String nome = binding.etNome.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
@@ -78,24 +67,32 @@ public class cadastro_activity extends AppCompatActivity {
                 return;
             }
 
-            // Criptografar senha e salvar no banco
+            // Criptografar senha
             String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
             Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, "adm");
+
+            // Inserir no Room
             db.UsuarioDao().inserir(novoUsuario);
+
+            // Inserir no Firebase (de forma assíncrona, mas com feedback)
+            new Thread(() -> {
+                String resultadoFirebase = FirebaseService.inserirUsuario(novoUsuario);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, resultadoFirebase, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Enviado para Firebase!", Toast.LENGTH_SHORT).show();
+                });
+            }).start();
 
             runOnUiThread(() -> {
                 Toast.makeText(this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                finish(); // Volta pra tela anterior (login)
+                finish();
             });
+
         }).start();
     }
 
-    /**
-     * Volta para a tela de login
-     */
     private void voltarLogin() {
-        Intent intent = new Intent(this, login_activity.class);
-        startActivity(intent);
-        finish(); // Fecha esta activity pra não voltar com o botão "Voltar"
+        startActivity(new Intent(this, login_activity.class));
+        finish();
     }
 }

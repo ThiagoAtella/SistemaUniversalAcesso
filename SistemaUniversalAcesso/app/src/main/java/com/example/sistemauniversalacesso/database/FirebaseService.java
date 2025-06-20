@@ -1,0 +1,153 @@
+package com.example.sistemauniversalacesso.database;
+
+import com.example.sistemauniversalacesso.database.FirebaseConfig;
+import com.example.sistemauniversalacesso.models.Usuario;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class FirebaseService {
+
+    public static String inserirUsuario(Usuario usuario) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios.json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("nome", usuario.getNome());
+            json.put("email", usuario.getEmail());
+            json.put("senha", usuario.getSenha());
+            json.put("nivel", usuario.getNivel());
+
+            OutputStream os = conn.getOutputStream();
+            os.write(json.toString().getBytes());
+            os.flush();
+            os.close();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            in.close();
+
+            JSONObject resJson = new JSONObject(response.toString());
+            return "Inserido com ID: " + resJson.optString("name");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Erro: " + e.getMessage();
+        }
+    }
+
+    public static List<Usuario> listarUsuarios() {
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios.json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            in.close();
+
+            JSONObject json = new JSONObject(response.toString());
+
+            for (Iterator<String> it = json.keys(); it.hasNext(); ) {
+                String id = it.next();
+                JSONObject obj = json.getJSONObject(id);
+
+                Usuario usuario = new Usuario();
+                usuario.setNome(obj.optString("nome"));
+                usuario.setEmail(obj.optString("email"));
+                usuario.setSenha(obj.optString("senha"));
+                usuario.setNivel(obj.optString("nivel"));
+                usuario.setId(0); // opcional: Room controla o ID local
+
+                lista.add(usuario);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public static String atualizarUsuario(String firebaseId, Usuario usuario) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios/" + firebaseId + ".json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("PATCH");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("nome", usuario.getNome());
+            json.put("email", usuario.getEmail());
+            json.put("senha", usuario.getSenha());
+            json.put("nivel", usuario.getNivel());
+
+            OutputStream os = conn.getOutputStream();
+            os.write(json.toString().getBytes());
+            os.flush();
+            os.close();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            in.close();
+
+            return "Atualizado: " + response.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Erro: " + e.getMessage();
+        }
+    }
+
+    public static String excluirUsuario(String firebaseId) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios/" + firebaseId + ".json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("DELETE");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            int responseCode = conn.getResponseCode();
+            return (responseCode == 200) ? "Excluído com sucesso" : "Erro ao excluir: " + responseCode;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Erro: " + e.getMessage();
+        }
+    }
+}
