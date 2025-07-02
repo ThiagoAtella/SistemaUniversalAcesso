@@ -4,7 +4,24 @@
             "outputFile": "com.example.sistemauniversalacesso.app-mergeDebugResources-34:/values-bn/values-bn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\.gradle\\caches\\8.9\\transforms\\639a04086d242e159fd12365490b093a\\transformed\\material-1.12.0\\res\\values-bn\\values-bn.xml",
+                    "source": "/home/aluno/.gradle/caches/8.9/transforms/0d5e7f520bfdd15201c31d8d28b627cb/transformed/core-1.13.0/res/values-bn/values-bn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,154,256,358,461,562,664,784",
+                        "endColumns": "98,101,101,102,100,101,119,100",
+                        "endOffsets": "149,251,353,456,557,659,779,880"
+                    },
+                    "to": {
+                        "startLines": "38,39,40,41,42,43,44,116",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3518,3617,3719,3821,3924,4025,4127,9911",
+                        "endColumns": "98,101,101,102,100,101,119,100",
+                        "endOffsets": "3612,3714,3816,3919,4020,4122,4242,10007"
+                    }
+                },
+                {
+                    "source": "/home/aluno/.gradle/caches/8.9/transforms/639a04086d242e159fd12365490b093a/transformed/material-1.12.0/res/values-bn/values-bn.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,24 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\.gradle\\caches\\8.9\\transforms\\0d5e7f520bfdd15201c31d8d28b627cb\\transformed\\core-1.13.0\\res\\values-bn\\values-bn.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,154,256,358,461,562,664,784",
-                        "endColumns": "98,101,101,102,100,101,119,100",
-                        "endOffsets": "149,251,353,456,557,659,779,880"
-                    },
-                    "to": {
-                        "startLines": "38,39,40,41,42,43,44,116",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3518,3617,3719,3821,3924,4025,4127,9911",
-                        "endColumns": "98,101,101,102,100,101,119,100",
-                        "endOffsets": "3612,3714,3816,3919,4020,4122,4242,10007"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\.gradle\\caches\\8.9\\transforms\\d330e4cd0e54c93bbc6762f27a4947c3\\transformed\\appcompat-1.7.0\\res\\values-bn\\values-bn.xml",
+                    "source": "/home/aluno/.gradle/caches/8.9/transforms/d330e4cd0e54c93bbc6762f27a4947c3/transformed/appcompat-1.7.0/res/values-bn/values-bn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

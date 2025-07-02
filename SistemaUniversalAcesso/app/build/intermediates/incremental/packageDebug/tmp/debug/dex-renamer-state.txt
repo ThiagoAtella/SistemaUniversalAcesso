@@ -1,12 +1,12 @@
-#Fri Jun 20 17:57:39 BRT 2025
-base.0=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
-base.3=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
-base.4=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.5=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.6=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.7=C\:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Wed Jul 02 09:55:47 BRT 2025
+base.0=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/11/classes.dex
+base.3=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/15/classes.dex
+base.4=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
+base.5=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+base.6=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex
+base.7=/home/aluno/Documentos/GitHub/SistemaUniversalAcesso/SistemaUniversalAcesso/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=11/classes.dex

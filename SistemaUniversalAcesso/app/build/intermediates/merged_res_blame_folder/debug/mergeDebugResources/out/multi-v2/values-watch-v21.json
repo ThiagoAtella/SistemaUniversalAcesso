@@ -4,7 +4,7 @@
             "outputFile": "com.example.sistemauniversalacesso.app-mergeDebugResources-34:/values-watch-v21/values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Atella2\\Documents\\GitHub\\SistemaUniversalAcesso\\SistemaUniversalAcesso\\.gradle\\caches\\8.9\\transforms\\d330e4cd0e54c93bbc6762f27a4947c3\\transformed\\appcompat-1.7.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "/home/aluno/.gradle/caches/8.9/transforms/d330e4cd0e54c93bbc6762f27a4947c3/transformed/appcompat-1.7.0/res/values-watch-v21/values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

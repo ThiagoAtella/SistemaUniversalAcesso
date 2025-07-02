@@ -57,6 +57,7 @@ public class Usuario {
     public void setFirebaseId(String firebaseId) {
         this.firebaseId = firebaseId;
     }
+
 }
 
 

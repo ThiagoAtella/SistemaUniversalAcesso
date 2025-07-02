@@ -12,22 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sistemauniversalacesso.R;
-import com.example.sistemauniversalacesso.database.SistemaDatabase;
+import com.example.sistemauniversalacesso.adapters.UsuarioAdapter;
+import com.example.sistemauniversalacesso.database.FirebaseService;
 import com.example.sistemauniversalacesso.databinding.DialogEditarUsuarioBinding;
 import com.example.sistemauniversalacesso.databinding.FragmentUsuariosBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.PasswordUtils;
-import com.example.sistemauniversalacesso.adapters.UsuarioAdapter;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class UsuariosFragment extends Fragment {
-    // binding do fragmentUsuarios
+
     private FragmentUsuariosBinding binding;
-    // banco de dados
-    private SistemaDatabase db;
-    //adapter do recyclerView
     private UsuarioAdapter adapter;
 
     public UsuariosFragment() {}
@@ -35,12 +31,9 @@ public class UsuariosFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentUsuariosBinding.inflate(inflater, container, false);
-        // inicializa a instância do banco de dados
-        db = SistemaDatabase.getInstance(requireContext());
         binding.recyclerUsuarios.setLayoutManager(new LinearLayoutManager(requireContext()));
-        // carrega os usuários que estão salvos no banco
         carregarUsuarios();
-        // configura o botão para adicionar usuários
+
         binding.btnAdicionar.setOnClickListener(v -> mostrarDialogAdicionarUsuario());
 
         return binding.getRoot();
@@ -48,9 +41,7 @@ public class UsuariosFragment extends Fragment {
 
     private void carregarUsuarios() {
         new Thread(() -> {
-            Usuario[] usuariosArray = db.UsuarioDao().loadAllUsers();
-            List<Usuario> usuarios = Arrays.asList(usuariosArray); //obtém os usuarios pelo array do room
-            // atualiza a interface com as informações recebidas
+            List<Usuario> usuarios = FirebaseService.listarUsuarios();
             requireActivity().runOnUiThread(() -> {
                 adapter = new UsuarioAdapter(usuarios, new UsuarioAdapter.UsuarioCallback() {
                     @Override
@@ -67,9 +58,10 @@ public class UsuariosFragment extends Fragment {
             });
         }).start();
     }
-    //exibe um diálogo para adicionar um usuário
+
     private void mostrarDialogAdicionarUsuario() {
-        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater()); // reuso do dialogEditarUsuario
+        DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
+
         new AlertDialog.Builder(requireContext())
                 .setTitle("Adicionar Usuário")
                 .setView(dialogBinding.getRoot())
@@ -88,26 +80,23 @@ public class UsuariosFragment extends Fragment {
                     Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, nivel);
 
                     new Thread(() -> {
-                        db.UsuarioDao().inserir(novoUsuario);
+                        FirebaseService.inserirUsuario(novoUsuario);
                         requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(requireContext(), "Usuário adicionado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
                             carregarUsuarios();
                         });
                     }).start();
                 })
-
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
-    //dialogo para editar o usuário (parecido com o anterior)
+
     private void mostrarDialogEdicao(Usuario usuario) {
         DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
 
-        // Preenche os campos com os dados atuais do usuário
         dialogBinding.etNome.setText(usuario.getNome());
         dialogBinding.etEmail.setText(usuario.getEmail());
 
-        // Define o nível atual no Spinner
         String[] niveis = getResources().getStringArray(R.array.niveis_usuario);
         for (int i = 0; i < niveis.length; i++) {
             if (niveis[i].equals(usuario.getNivel())) {
@@ -116,12 +105,10 @@ public class UsuariosFragment extends Fragment {
             }
         }
 
-        // Cria o AlertDialog com o layout customizado
         new AlertDialog.Builder(requireContext())
                 .setTitle("Editar Usuário")
                 .setView(dialogBinding.getRoot())
                 .setPositiveButton("Salvar", (dialog, which) -> {
-                    // Atualiza os dados com o que foi digitado
                     usuario.setNome(dialogBinding.etNome.getText().toString());
                     usuario.setEmail(dialogBinding.etEmail.getText().toString());
                     usuario.setNivel(dialogBinding.spNivel.getSelectedItem().toString());
@@ -133,7 +120,7 @@ public class UsuariosFragment extends Fragment {
                     }
 
                     new Thread(() -> {
-                        db.UsuarioDao().update(usuario);
+                        FirebaseService.atualizarUsuario(usuario.getFirebaseId(), usuario);
                         requireActivity().runOnUiThread(() -> {
                             Toast.makeText(requireContext(), "Usuário atualizado", Toast.LENGTH_SHORT).show();
                             carregarUsuarios();
@@ -144,16 +131,16 @@ public class UsuariosFragment extends Fragment {
                 .show();
     }
 
-    // exclui um usuário do banco de dados
     private void deletarUsuario(Usuario usuario) {
         new Thread(() -> {
-            db.UsuarioDao().delete(usuario);
+            FirebaseService.excluirUsuario(usuario.getFirebaseId());
             requireActivity().runOnUiThread(() -> {
                 Toast.makeText(requireContext(), "Usuário deletado", Toast.LENGTH_SHORT).show();
                 carregarUsuarios();
             });
         }).start();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

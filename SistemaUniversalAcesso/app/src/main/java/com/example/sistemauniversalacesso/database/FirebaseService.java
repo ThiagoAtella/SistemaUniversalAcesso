@@ -76,7 +76,8 @@ public class FirebaseService {
             JSONObject json = new JSONObject(response.toString());
 
             for (Iterator<String> it = json.keys(); it.hasNext(); ) {
-                String id = it.next();
+                String id = it.next(); // <- ESTE É O firebaseId
+
                 JSONObject obj = json.getJSONObject(id);
 
                 Usuario usuario = new Usuario();
@@ -84,10 +85,11 @@ public class FirebaseService {
                 usuario.setEmail(obj.optString("email"));
                 usuario.setSenha(obj.optString("senha"));
                 usuario.setNivel(obj.optString("nivel"));
-                usuario.setId(0); // opcional: Room controla o ID local
+                usuario.setFirebaseId(id);
 
                 lista.add(usuario);
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,6 +97,32 @@ public class FirebaseService {
 
         return lista;
     }
+
+    public static JSONObject getAllUsuariosJson() {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios.json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            in.close();
+
+            return new JSONObject(response.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JSONObject(); // Retorna vazio em caso de falha
+        }
+    }
+
 
     public static String atualizarUsuario(String firebaseId, Usuario usuario) {
         try {

@@ -1,34 +1,38 @@
 [
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/cadastro.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/cadastro.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/activity_main.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_tela_restrita.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_tela_restrita.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_usuarios.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/fragment_usuarios.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/activity_main.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/activity_main.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/item_usuario.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/item_usuario.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/dialog_editar_usuario.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/dialog_editar_usuario.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_tela_restrita.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/fragment_tela_restrita.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/login.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/login.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/dialog_editar_usuario.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/dialog_editar_usuario.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_usuarios.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_usuarios.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/cadastro.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/cadastro.xml"
     },
     {
-        "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_config.xml",
-        "source": "com.example.sistemauniversalacesso.app-main-38:/layout/fragment_config.xml"
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/fragment_config.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/fragment_config.xml"
     },
     {
         "merged": "com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/item_usuario.xml",
         "source": "com.example.sistemauniversalacesso.app-main-38:/layout/item_usuario.xml"
+    },
+    {
+        "merged": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-mergeDebugResources-35:/layout/login.xml",
+        "source": "/home/aluno/.gradle/daemon/8.9/com.example.sistemauniversalacesso.app-main-38:/layout/login.xml"
     }
 ]

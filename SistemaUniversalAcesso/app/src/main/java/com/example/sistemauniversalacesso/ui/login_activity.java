@@ -2,22 +2,24 @@ package com.example.sistemauniversalacesso.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sistemauniversalacesso.database.SistemaDatabase;
+import com.example.sistemauniversalacesso.database.FirebaseService;
 import com.example.sistemauniversalacesso.databinding.LoginBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.PasswordUtils;
 import com.example.sistemauniversalacesso.utils.SessionManager;
 
-import java.util.List;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 
 public class login_activity extends AppCompatActivity {
 
     private LoginBinding binding;
-    private SistemaDatabase db;
     private SessionManager session;
 
     @Override
@@ -26,20 +28,17 @@ public class login_activity extends AppCompatActivity {
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = SistemaDatabase.getInstance(this);
         session = new SessionManager(this);
 
-        // Auto-login se já estiver logado
         if (session.isLogado()) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
             return;
         }
 
-        binding.btnLogin.setOnClickListener(v -> RealizarLogin());
+        binding.btnLogin.setOnClickListener(v -> realizarLogin());
         binding.btnCadastro.setOnClickListener(v -> {
-            Intent intent = new Intent(login_activity.this, cadastro_activity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, cadastro_activity.class));
         });
     }
 
@@ -52,11 +51,11 @@ public class login_activity extends AppCompatActivity {
         return senha.matches(regex);
     }
 
-    private void RealizarLogin() {
+    private void realizarLogin() {
         String email = binding.etEmail.getText().toString().trim();
-        String senha = binding.etSenha.getText().toString();
+        String senhaDigitada = binding.etSenha.getText().toString();
 
-        if (email.isEmpty() || senha.isEmpty()) {
+        if (email.isEmpty() || senhaDigitada.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -66,28 +65,58 @@ public class login_activity extends AppCompatActivity {
             return;
         }
 
-        if (!isSenhaSegura(senha)) {
-            binding.etSenha.setError("Senha não atende aos critérios mínimos.");
+        if (!isSenhaSegura(senhaDigitada)) {
+            binding.etSenha.setError("Senha inválida.");
             return;
         }
 
+        // Firebase GET em background
         new Thread(() -> {
-            List<Usuario> usuarios = db.UsuarioDao().loadALLEmail(email);
-            Usuario usuario = (usuarios.isEmpty()) ? null : usuarios.get(0);
+            try {
+                JSONObject json = FirebaseService.getAllUsuariosJson();
+                // GET /usuarios.json
+                Usuario usuarioEncontrado = null;
 
-            runOnUiThread(() -> {
-                if (usuario != null && PasswordUtils.verifyPassword(senha, usuario.getSenha())) {
+                for (Iterator<String> it = json.keys(); it.hasNext(); ) {
+                    String id = it.next();
+                    JSONObject obj = json.getJSONObject(id);
+                    String emailBanco = obj.optString("email");
 
-                    // ✅ Salvando sessão com nome, email e nível
-                    session.salvarSessao(usuario.getNome(), usuario.getEmail(), usuario.getNivel());
-
-                    startActivity(new Intent(login_activity.this, MainActivity.class));
-                    finish();
-
-                } else {
-                    Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
+                    if (emailBanco.equalsIgnoreCase(email)) {
+                        Usuario u = new Usuario();
+                        u.setNome(obj.optString("nome"));
+                        u.setEmail(emailBanco);
+                        u.setSenha(obj.optString("senha"));
+                        u.setNivel(obj.optString("nivel"));
+                        u.setFirebaseId(id);
+                        usuarioEncontrado = u;
+                        break;
+                    }
                 }
-            });
+
+                Usuario finalUsuario = usuarioEncontrado;
+                runOnUiThread(() -> {
+                    if (finalUsuario != null && PasswordUtils.verifyPassword(senhaDigitada, finalUsuario.getSenha())) {
+                        session.salvarSessao(
+                                finalUsuario.getNome(),
+                                finalUsuario.getEmail(),
+                                finalUsuario.getNivel()
+                        );
+
+                        Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Erro ao conectar ao Firebase: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
+            }
         }).start();
     }
 }
