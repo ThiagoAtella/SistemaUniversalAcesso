@@ -1,0 +1,130 @@
+[
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_dialog_editar_usuario.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\dialog_editar_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_fragment_usuarios.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\fragment_usuarios.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\raw_login_sucess.json.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\raw\\login_sucess.json"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_login.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\login.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_fragment_tela_restrita.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\fragment_tela_restrita.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\menu_menu_bottom_nav.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\menu\\menu_bottom_nav.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_cadastro.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\cadastro.xml"
+    },
+    {
+        "merged": "com.example.sistemauniversalacesso.app-debug-38:/layout_fragment_tela_restrita.xml.flat",
+        "source": "com.example.sistemauniversalacesso.app-main-40:/layout/fragment_tela_restrita.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_ic_group.png.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\ic_group.png"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_item_usuario.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\item_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\raw_login_error.json.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\raw\\login_error.json"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_nav_background_curved.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\nav_background_curved.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_ic_config.png.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\ic_config.png"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\layout_fragment_config.xml.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\layout\\fragment_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\drawable_ic_person.png.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\drawable\\ic_person.png"
+    },
+    {
+        "merged": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-debug-38:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\labra\\.gradle\\daemon\\8.9\\com.example.sistemauniversalacesso.app-main-40:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    }
+]

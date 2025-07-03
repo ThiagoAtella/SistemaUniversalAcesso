@@ -1,0 +1,210 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.sistemauniversalacesso"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.CAMERA" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:5-65
+12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:22-62
+13    <uses-feature
+13-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
+14        android:name="android.hardware.camera"
+14-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
+15        android:required="false" />
+15-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
+16    <uses-feature
+16-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+17        android:name="android.hardware.camera.front"
+17-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+18        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+18-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+19    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+20    <uses-feature
+20-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
+21        android:name="android.hardware.camera.autofocus"
+21-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
+22        android:required="false" />
+22-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
+23    <uses-feature
+23-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+24        android:name="android.hardware.camera.flash"
+24-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+25        android:required="false" />
+25-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+26    <uses-feature
+26-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+27        android:name="android.hardware.screen.landscape"
+27-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+28        android:required="false" />
+28-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+29    <uses-feature
+29-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+30        android:name="android.hardware.wifi"
+30-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+31        android:required="false" />
+31-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+32
+33    <permission
+33-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+34        android:name="com.example.sistemauniversalacesso.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+34-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+35        android:protectionLevel="signature" />
+35-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+36
+37    <uses-permission android:name="com.example.sistemauniversalacesso.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+37-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+37-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+38
+39    <application
+39-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:7:5-31:19
+40        android:allowBackup="true"
+40-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:8:9-35
+41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+41-->[androidx.core:core:1.13.0] C:\Users\labra\.gradle\caches\8.9\transforms\0d5e7f520bfdd15201c31d8d28b627cb\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+42        android:dataExtractionRules="@xml/data_extraction_rules"
+42-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:9:9-65
+43        android:debuggable="true"
+44        android:extractNativeLibs="false"
+45        android:fullBackupContent="@xml/backup_rules"
+45-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:10:9-54
+46        android:icon="@mipmap/ic_launcher"
+46-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:11:9-43
+47        android:label="@string/app_name"
+47-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:12:9-41
+48        android:roundIcon="@mipmap/ic_launcher_round"
+48-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:13:9-54
+49        android:supportsRtl="true"
+49-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:14:9-35
+50        android:testOnly="true"
+51        android:theme="@style/Theme.SistemaUniversalAcesso" >
+51-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:15:9-60
+52        <activity
+52-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:18:9-26:20
+53            android:name="com.example.sistemauniversalacesso.ui.login_activity"
+53-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:19:13-46
+54            android:exported="true" >
+54-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:20:13-36
+55            <intent-filter>
+55-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:21:13-25:29
+56                <action android:name="android.intent.action.MAIN" />
+56-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:22:17-69
+56-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:22:25-66
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+58-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:17-77
+58-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:24:27-74
+59            </intent-filter>
+60        </activity>
+61        <activity
+61-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:27:9-28:39
+62            android:name="com.example.sistemauniversalacesso.ui.cadastro_activity"
+62-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:27:19-55
+63            android:exported="false" />
+63-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:28:13-37
+64        <activity
+64-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:29:9-30:39
+65            android:name="com.example.sistemauniversalacesso.ui.MainActivity"
+65-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:29:19-50
+66            android:exported="false" />
+66-->C:\Users\labra\OneDrive\Documentos\GitHub\SistemaUniversalAcesso\SistemaUniversalAcesso\app\src\main\AndroidManifest.xml:30:13-37
+67
+68        <service
+68-->[androidx.room:room-runtime:2.6.1] C:\Users\labra\.gradle\caches\8.9\transforms\b3da94eed2c52e99e28e18e870653487\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+69            android:name="androidx.room.MultiInstanceInvalidationService"
+69-->[androidx.room:room-runtime:2.6.1] C:\Users\labra\.gradle\caches\8.9\transforms\b3da94eed2c52e99e28e18e870653487\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+70            android:directBootAware="true"
+70-->[androidx.room:room-runtime:2.6.1] C:\Users\labra\.gradle\caches\8.9\transforms\b3da94eed2c52e99e28e18e870653487\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+71            android:exported="false" />
+71-->[androidx.room:room-runtime:2.6.1] C:\Users\labra\.gradle\caches\8.9\transforms\b3da94eed2c52e99e28e18e870653487\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+72
+73        <activity
+73-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+74            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+74-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+75            android:clearTaskOnLaunch="true"
+75-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+76            android:screenOrientation="sensorLandscape"
+76-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+77            android:stateNotNeeded="true"
+77-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+78            android:theme="@style/zxing_CaptureTheme"
+78-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+79            android:windowSoftInputMode="stateAlwaysHidden" />
+79-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7de5634c45c6b9fbe452424e3faf9379\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+80
+81        <provider
+81-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+82            android:name="androidx.startup.InitializationProvider"
+82-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+83            android:authorities="com.example.sistemauniversalacesso.androidx-startup"
+83-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+84            android:exported="false" >
+84-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+85            <meta-data
+85-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+86                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+86-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+87                android:value="androidx.startup" />
+87-->[androidx.emoji2:emoji2:1.3.0] C:\Users\labra\.gradle\caches\8.9\transforms\7fc17219575cc8c3f9bd57fe1184343f\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+88            <meta-data
+88-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\labra\.gradle\caches\8.9\transforms\2b8a3bb224e0930fcacb79e976f02621\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+89                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+89-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\labra\.gradle\caches\8.9\transforms\2b8a3bb224e0930fcacb79e976f02621\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+90                android:value="androidx.startup" />
+90-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\labra\.gradle\caches\8.9\transforms\2b8a3bb224e0930fcacb79e976f02621\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+91            <meta-data
+91-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+92                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+93                android:value="androidx.startup" />
+93-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+94        </provider>
+95
+96        <receiver
+96-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+97            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+98            android:directBootAware="false"
+98-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+99            android:enabled="true"
+99-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+100            android:exported="true"
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+101            android:permission="android.permission.DUMP" >
+101-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+102            <intent-filter>
+102-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+103                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+104            </intent-filter>
+105            <intent-filter>
+105-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+106                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+107            </intent-filter>
+108            <intent-filter>
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+109                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+110            </intent-filter>
+111            <intent-filter>
+111-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+112                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\labra\.gradle\caches\8.9\transforms\20335afd3a1b762f79cd846fa500335d\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+113            </intent-filter>
+114        </receiver>
+115    </application>
+116
+117</manifest>

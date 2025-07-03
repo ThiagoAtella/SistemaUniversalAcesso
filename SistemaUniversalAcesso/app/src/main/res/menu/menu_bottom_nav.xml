@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_usuarios"
+        android:title="Usuários"
+        android:icon="@drawable/ic_group" />
+    <item
+        android:id="@+id/nav_perfil"
+        android:title="Perfil"
+        android:icon="@drawable/ic_person" />
+    <item
+        android:id="@+id/nav_config"
+        android:title="Config"
+        android:icon="@drawable/ic_config" />
+</menu>
