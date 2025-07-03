@@ -1,8 +1,5 @@
 package com.example.sistemauniversalacesso.fragments;
 
-import android.graphics.Bitmap;
-import android.content.Intent;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.databinding.FragmentTelaRestritaBinding;
-import com.example.sistemauniversalacesso.ui.login_activity;
-import com.example.sistemauniversalacesso.utils.SessionManager;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class TelaRestritaFragment extends Fragment {
 
@@ -33,34 +26,27 @@ public class TelaRestritaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SessionManager session = new SessionManager(requireContext());
+        // Inicializa com Perfil
+        getChildFragmentManager().beginTransaction()
+                .replace(binding.fragmentUserContainer.getId(), new PerfilFragment())
+                .commit();
 
-        binding.btnGerarQr.setOnClickListener(v -> {
-            String conteudo = "Nome: " + session.getNome()
-                    + "\nEmail: " + session.getEmail()
-                    + "\nNível: " + session.getNivel();
+        binding.bottomNavUser.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
 
-            try {
-                BarcodeEncoder encoder = new BarcodeEncoder();
-                Bitmap bitmap = encoder.encodeBitmap(conteudo, BarcodeFormat.QR_CODE, 500, 500);
-                binding.imgQRCode.setImageBitmap(bitmap);
-                binding.imgQRCode.setVisibility(View.VISIBLE);
-            } catch (WriterException e) {
-                e.printStackTrace();
+            if (item.getItemId() == R.id.nav_perfil) {
+                selectedFragment = new PerfilFragment();
+            } else if (item.getItemId() == R.id.nav_qrcode) {
+                selectedFragment = new QrFragment();
             }
-        });
 
-        binding.btnLogout.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireContext())
-                    .setTitle("Confirmação")
-                    .setMessage("Deseja realmente sair da conta?")
-                    .setPositiveButton("Sim", (dialog, which) -> {
-                        session.logout();
-                        startActivity(new Intent(requireContext(), login_activity.class));
-                        requireActivity().finish();
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
+            if (selectedFragment != null) {
+                getChildFragmentManager().beginTransaction()
+                        .replace(binding.fragmentUserContainer.getId(), selectedFragment)
+                        .commit();
+                return true;
+            }
+            return false;
         });
     }
 
