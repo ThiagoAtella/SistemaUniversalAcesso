@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#191970"
+    android:background="#0F111F"
     android:padding="24dp">
 
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="Cadastre-se"
-        android:textColor="@color/white"
+        android:textColor="#00E5FF"
         android:textSize="28sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-condensed-medium" />
@@ -66,8 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Criar Conta"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#111"
+            android:textColor="#00E5FF"
+            android:backgroundTint="#0F111F"
             android:textSize="18sp"
             android:layout_marginTop="16dp" />
 
@@ -76,8 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Voltar"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#111"
+            android:textColor="#00E5FF"
+            android:backgroundTint="#0F111F"
             android:textSize="18sp"
             android:layout_marginTop="16dp"/>
     </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="16dp"
-    android:background="#191970"
+    android:background="#0F111F"
     android:gravity="center"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -11,7 +11,7 @@
     <TextView android:id="@+id/tvNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/azul_neon"
         android:textSize="28sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-condensed-medium"/>
@@ -19,7 +19,7 @@
     <TextView android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
+        android:textColor="@color/azul_neon"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -30,16 +30,16 @@
             android:text="Editar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/azul_neon"
+            android:backgroundTint="#0F111F"
             android:textSize="18sp" />
 
         <Button android:id="@+id/btnDeletar"
             android:text="Deletar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/azul_neon"
+            android:backgroundTint="#0F111F"
             android:textSize="18sp"/>
     </LinearLayout>
 </LinearLayout>

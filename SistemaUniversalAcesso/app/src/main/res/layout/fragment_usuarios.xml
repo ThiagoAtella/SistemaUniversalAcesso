@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:text="Adicionar Usuário"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/black"
+        android:textColor="@color/azul_neon"
+        android:backgroundTint="#0F111F"
         android:textSize="18sp"
         android:layout_marginTop="16dp" />
 

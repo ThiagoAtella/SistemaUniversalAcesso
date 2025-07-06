@@ -8,11 +8,10 @@
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sair da conta"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/black"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"/>
+        android:text="Sair"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#D32F2F"
+        android:textColor="@android:color/white"/>
 </LinearLayout>

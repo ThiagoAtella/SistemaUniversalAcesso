@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="24dp"
-    android:background="#191970">
+    android:background="#0F111F">
 
     <ImageView
         android:id="@+id/ivQRCode"
@@ -16,8 +16,8 @@
         android:id="@+id/btnGerarQRCode"
         android:text="Gerar QR Code"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/black"
+        android:textColor="@color/azul_neon"
+        android:backgroundTint="#0F111F"
         android:elevation="6dp"
         android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
