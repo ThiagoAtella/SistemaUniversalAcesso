@@ -1,6 +1,7 @@
 package com.example.sistemauniversalacesso.database;
 
 import com.example.sistemauniversalacesso.database.FirebaseConfig;
+import com.example.sistemauniversalacesso.models.LocalAcesso;
 import com.example.sistemauniversalacesso.models.Usuario;
 
 import org.json.JSONObject;
@@ -178,4 +179,33 @@ public class FirebaseService {
             return "Erro: " + e.getMessage();
         }
     }
+
+    public static void salvarLocal(LocalAcesso local) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/locais/" + local.getId() + ".json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("id", local.getId());
+            json.put("nome", local.getNome());
+            json.put("tipo", local.getTipo());
+            json.put("capacidade", local.getCapacidade());
+            json.put("endereco", local.getEndereco());
+            json.put("exigePagamento", local.isExigePagamento());
+
+            OutputStream os = conn.getOutputStream();
+            os.write(json.toString().getBytes());
+            os.flush();
+            os.close();
+
+            conn.getInputStream(); // força o envio
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

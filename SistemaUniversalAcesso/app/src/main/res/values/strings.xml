@@ -7,4 +7,12 @@
         <item>adm</item>
     </string-array>
 
+    <string-array name="tipos_local">
+        <item>Restaurante</item>
+        <item>Auditório</item>
+        <item>Aeroporto</item>
+        <item>Outro</item>
+    </string-array>
+
+
 </resources>
