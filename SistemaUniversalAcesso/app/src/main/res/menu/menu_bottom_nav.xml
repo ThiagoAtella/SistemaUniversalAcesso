@@ -4,6 +4,10 @@
         android:title="Usuários"
         android:icon="@drawable/ic_group" />
     <item
+        android:id="@+id/nav_locais"
+        android:title="Locais"
+        android:icon="@drawable/ic_local"/>
+    <item
         android:id="@+id/nav_scanner"
         android:title="Scanner"
         android:icon="@drawable/ic_qr" />

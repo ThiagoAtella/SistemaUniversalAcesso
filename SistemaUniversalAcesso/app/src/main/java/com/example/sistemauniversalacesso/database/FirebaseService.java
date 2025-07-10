@@ -179,12 +179,53 @@ public class FirebaseService {
             return "Erro: " + e.getMessage();
         }
     }
+    public static List<LocalAcesso> listarLocais() {
+        List<LocalAcesso> locais = new ArrayList<>();
+        try {
+            // Conectar ao Firebase Realtime Database (com URL correta)
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/locais.json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
 
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Convertendo a resposta JSON para uma lista de locais
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            Iterator<String> keys = jsonResponse.keys();
+
+            // Itera pelos locais e cria objetos de LocalAcesso
+            while (keys.hasNext()) {
+                String key = keys.next();
+                JSONObject localJson = jsonResponse.getJSONObject(key);
+
+                String nome = localJson.optString("nome");
+                String tipo = localJson.optString("tipo");
+                int capacidade = localJson.optInt("capacidade");
+                String endereco = localJson.optString("endereco");
+                boolean exigePagamento = localJson.optBoolean("exigePagamento");
+
+                LocalAcesso local = new LocalAcesso(key, nome, tipo, capacidade, endereco, exigePagamento);
+                locais.add(local);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return locais;
+    }
     public static void salvarLocal(LocalAcesso local) {
         try {
             URL url = new URL(FirebaseConfig.DATABASE_URL + "/locais/" + local.getId() + ".json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
@@ -201,11 +242,49 @@ public class FirebaseService {
             os.write(json.toString().getBytes());
             os.flush();
             os.close();
-
-            conn.getInputStream(); // força o envio
+            conn.getInputStream(); // Força o envio
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public static void atualizarLocal(LocalAcesso local) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/locais/" + local.getId() + ".json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PATCH");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("nome", local.getNome());
+            json.put("tipo", local.getTipo());
+            json.put("capacidade", local.getCapacidade());
+            json.put("endereco", local.getEndereco());
+            json.put("exigePagamento", local.isExigePagamento());
+
+            OutputStream os = conn.getOutputStream();
+            os.write(json.toString().getBytes());
+            os.flush();
+            os.close();
+            conn.getInputStream(); // Força o envio
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void excluirLocal(String localId) {
+        try {
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/locais/" + localId + ".json");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            conn.getInputStream(); // Força a execução da operação
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+

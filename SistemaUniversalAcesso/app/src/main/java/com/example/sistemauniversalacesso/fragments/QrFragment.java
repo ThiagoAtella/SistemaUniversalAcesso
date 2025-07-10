@@ -41,7 +41,7 @@ public class QrFragment extends Fragment {
         SessionManager session = new SessionManager(requireContext());
         String email = session.getEmail();
         long agora = System.currentTimeMillis() / 1000; // segundos
-        long expira = agora + (5 * 60); // 5 minutos em segundos
+        long expira = agora + (1 * 60);
 
         JSONObject json = new JSONObject();
         try {

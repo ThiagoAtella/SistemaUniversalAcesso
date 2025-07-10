@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.databinding.ActivityMainBinding;
 import com.example.sistemauniversalacesso.fragments.ConfigFragment;
+import com.example.sistemauniversalacesso.fragments.LocalFragment;
 import com.example.sistemauniversalacesso.fragments.QrScannerFragment;
 import com.example.sistemauniversalacesso.fragments.TelaRestritaFragment;
 import com.example.sistemauniversalacesso.fragments.UsuariosFragment;
@@ -60,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             if (item.getItemId() == R.id.nav_usuarios) {
                 fragment = new UsuariosFragment();
+            }
+            else if (item.getItemId() == R.id.nav_locais) {
+                fragment = new LocalFragment();
             }
             else if (item.getItemId() == R.id.nav_scanner) {
                 fragment = new QrScannerFragment();
