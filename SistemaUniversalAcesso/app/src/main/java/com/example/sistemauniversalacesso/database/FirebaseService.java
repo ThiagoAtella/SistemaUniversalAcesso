@@ -19,7 +19,7 @@ public class FirebaseService {
 
     public static String inserirUsuario(Usuario usuario) {
         try {
-            URL url = new URL(FirebaseConfig.DATABASE_URL + "/usuarios.json");
+            URL url = new URL(FirebaseConfig.DATABASE_URL + "/Usuarios.json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("POST");

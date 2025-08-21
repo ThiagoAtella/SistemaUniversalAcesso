@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "672917968838",
+    "firebase_url": "https://sua-da6a2-default-rtdb.firebaseio.com",
+    "project_id": "sua-da6a2",
+    "storage_bucket": "sua-da6a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672917968838:android:d1611712506d56df09c4c7",
+        "android_client_info": {
+          "package_name": "com.example.sistemauniversaldeacesso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672917968838-kmgclf8grjopgvpln31cl7ipvl0677ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVpjl7CVSnZgIlEl7_SvR0LEdKshgKYYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672917968838-kmgclf8grjopgvpln31cl7ipvl0677ja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
