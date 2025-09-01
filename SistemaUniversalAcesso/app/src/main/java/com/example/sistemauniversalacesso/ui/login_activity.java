@@ -4,25 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.sistemauniversalacesso.database.FirebaseService;
 import com.example.sistemauniversalacesso.databinding.LoginBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
-import com.example.sistemauniversalacesso.utils.PasswordUtils;
 import com.example.sistemauniversalacesso.utils.SessionManager;
-
-import org.json.JSONObject;
-
-import java.util.Iterator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class login_activity extends AppCompatActivity {
 
     private LoginBinding binding;
     private SessionManager session;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +31,17 @@ public class login_activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         session = new SessionManager(this);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        if (session.isLogado()) {
+        // Verifica se o usuário já está logado no Firebase Auth
+        if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
             return;
         }
 
-        binding.btnLogin.setOnClickListener(v -> realizarLogin());
+        binding.btnLogin.setOnClickListener(v -> realizarLoginFirebase());
         binding.btnCadastro.setOnClickListener(v -> {
             startActivity(new Intent(this, cadastro_activity.class));
         });
@@ -48,26 +51,21 @@ public class login_activity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private boolean isSenhaSegura(String senha) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
-        return senha.matches(regex);
-    }
-
     private void showSuccessAnimation() {
-        binding.lottieSuccess.setVisibility(android.view.View.VISIBLE);
+        binding.lottieSuccess.setVisibility(View.VISIBLE);
         binding.lottieSuccess.playAnimation();
     }
 
     private void showErrorAnimation() {
-        binding.lottieError.setVisibility(android.view.View.VISIBLE);
+        binding.lottieError.setVisibility(View.VISIBLE);
         binding.lottieError.playAnimation();
     }
 
-    private void realizarLogin() {
+    private void realizarLoginFirebase() {
         String email = binding.etEmail.getText().toString().trim();
-        String senhaDigitada = binding.etSenha.getText().toString();
+        String senha = binding.etSenha.getText().toString();
 
-        if (email.isEmpty() || senhaDigitada.isEmpty()) {
+        if (email.isEmpty() || senha.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -77,61 +75,55 @@ public class login_activity extends AppCompatActivity {
             return;
         }
 
-        if (!isSenhaSegura(senhaDigitada)) {
-            binding.etSenha.setError("Senha inválida.");
-            return;
-        }
-
-        new Thread(() -> {
-            try {
-                JSONObject json = FirebaseService.getAllUsuariosJson();
-                Usuario usuarioEncontrado = null;
-
-                for (Iterator<String> it = json.keys(); it.hasNext(); ) {
-                    String id = it.next();
-                    JSONObject obj = json.getJSONObject(id);
-                    String emailBanco = obj.optString("email");
-
-                    if (emailBanco.equalsIgnoreCase(email)) {
-                        Usuario u = new Usuario();
-                        u.setNome(obj.optString("nome"));
-                        u.setEmail(emailBanco);
-                        u.setSenha(obj.optString("senha"));
-                        u.setNivel(obj.optString("nivel"));
-                        u.setFirebaseId(id);
-                        usuarioEncontrado = u;
-                        break;
-                    }
-                }
-
-                Usuario finalUsuario = usuarioEncontrado;
-                runOnUiThread(() -> {
-                    if (finalUsuario != null && PasswordUtils.verifyPassword(senhaDigitada, finalUsuario.getSenha())) {
+        // --- Passo 1: Autenticar o usuário com Firebase Auth ---
+        mAuth.signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Login bem-sucedido, agora buscamos os dados do usuário no Firestore
                         showSuccessAnimation();
-
-                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                            session.salvarSessao(
-                                    finalUsuario.getNome(),
-                                    finalUsuario.getEmail(),
-                                    finalUsuario.getNivel()
-                            );
-
-                            startActivity(new Intent(this, MainActivity.class));
-                            finish();
-                        }, 1500);
+                        buscarDadosDoUsuarioEIniciarSessao(task.getResult().getUser().getUid());
                     } else {
+                        // Falha no login
                         showErrorAnimation();
-                        Toast.makeText(this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(login_activity.this, "Usuário ou senha inválidos.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                runOnUiThread(() -> {
-                    showErrorAnimation();
-                    Toast.makeText(this, "Erro ao conectar ao Firebase: " + e.getMessage(), Toast.LENGTH_LONG).show();
+    private void buscarDadosDoUsuarioEIniciarSessao(String uid) {
+        // --- Passo 2: Buscar os dados adicionais (nome, tipo) do Firestore ---
+        db.collection("users").document(uid).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Converte o documento do Firestore para o nosso objeto Usuario
+                            Usuario usuarioLogado = document.toObject(Usuario.class);
+
+                            // Atraso para a animação ser exibida
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                // Salva os dados na sessão local
+                                session.salvarSessao(
+                                        usuarioLogado.getNome(),
+                                        usuarioLogado.getEmail(),
+                                        usuarioLogado.getTipo() // Usando o campo 'tipo' correto
+                                );
+
+                                startActivity(new Intent(this, MainActivity.class));
+                                finish();
+                            }, 1500); // 1.5 segundos de delay
+
+                        } else {
+                            // Caso estranho: usuário autenticado mas sem dados no Firestore
+                            showErrorAnimation();
+                            Toast.makeText(this, "Dados do usuário não encontrados.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Falha ao buscar dados
+                        showErrorAnimation();
+                        Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show();
+                    }
                 });
-            }
-        }).start();
     }
 }

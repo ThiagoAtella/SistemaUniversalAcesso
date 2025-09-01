@@ -17,17 +17,12 @@ public interface usuarioDAO {
     @Query("SELECT * FROM usuarios WHERE id IN (:userIds)")
     List<Usuario> loadAllByIds(int[] userIds);
 
-    @Query("SELECT * FROM usuarios WHERE email = :email AND senha = :senha LIMIT 1")
-    Usuario login(String email, String senha);
     @Query("SELECT * FROM usuarios WHERE nome = :nome ")
     List<Usuario> loadAllApelido(String nome);
 
 
     @Query("SELECT * FROM usuarios WHERE email = :email")
     List<Usuario> loadALLEmail(String email);
-
-    @Query("SELECT * FROM usuarios WHERE senha = :senha")
-    List<Usuario> loadALLSenha(String senha);
 
     @Query("SELECT COUNT(*) FROM usuarios WHERE email = :email")
     int checkEmailExists(String email); // Verifica se já existe algum usuário com o email fornecido,

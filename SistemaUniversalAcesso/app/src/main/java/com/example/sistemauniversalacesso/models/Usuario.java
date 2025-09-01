@@ -1,63 +1,83 @@
 package com.example.sistemauniversalacesso.models;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
 
 @Entity(tableName = "usuarios")
 public class Usuario {
+
     @PrimaryKey(autoGenerate = true)
+    @Exclude // Impede que este campo seja enviado para o Firebase
     private int id;
 
-    @ColumnInfo(name = "nome")
-    private String nome;
+    @Exclude // O ID do documento do Firebase é a chave, não um campo dentro dele
+    private String uid; // Para armazenar o ID do documento do Firebase (ex: "0rmonzzecKNx...")
+
+    // --- Campos que correspondem ao Firebase ---
+
+    @ColumnInfo(name = "avatar")
+    private String avatar;
+
+    @PropertyName("can_edit_users") // Mapeia o campo "can_edit_users" do Firebase
+    @ColumnInfo(name = "can_edit_users")
+    private boolean canEditUsers;
+
+    @PropertyName("data_cadastro") // Mapeia o campo "data_cadastro" do Firebase
+    @ColumnInfo(name = "data_cadastro")
+    private String dataCadastro;
 
     @ColumnInfo(name = "email")
     private String email;
 
-    @ColumnInfo(name = "senha")
-    private String senha;
+    @PropertyName("is_master") // Mapeia o campo "is_master" do Firebase
+    @ColumnInfo(name = "is_master")
+    private boolean isMaster;
 
-    @ColumnInfo(name = "nivel")  // 👈 aqui está o novo campo
-    private String nivel; // "user" ou "adm"
+    @ColumnInfo(name = "nome")
+    private String nome;
 
-    // Construtor principal
-    public Usuario(String nome, String email, String senha, String nivel) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.nivel = nivel;
-    }
+    @ColumnInfo(name = "tipo")
+    private String tipo; // Campo "nivel" foi renomeado para "tipo"
 
-    public Usuario() {} // para firebase
+    // Construtor vazio (essencial para o Firebase)
+    public Usuario() {}
 
+    // --- Getters e Setters ---
 
-    // Getters e Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public String getUid() { return uid; }
+    public void setUid(String uid) { this.uid = uid; }
+
+    public String getAvatar() { return avatar; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
+
+    @PropertyName("can_edit_users")
+    public boolean isCanEditUsers() { return canEditUsers; }
+    @PropertyName("can_edit_users")
+    public void setCanEditUsers(boolean canEditUsers) { this.canEditUsers = canEditUsers; }
+
+    @PropertyName("data_cadastro")
+    public String getDataCadastro() { return dataCadastro; }
+    @PropertyName("data_cadastro")
+    public void setDataCadastro(String dataCadastro) { this.dataCadastro = dataCadastro; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getSenha() { return senha; }
-    public void setSenha(String senha) { this.senha = senha; }
+    @PropertyName("is_master")
+    public boolean isMaster() { return isMaster; }
+    @PropertyName("is_master")
+    public void setMaster(boolean master) { isMaster = master; }
 
-    public String getNivel() { return nivel; }
-    public void setNivel(String nivel) { this.nivel = nivel; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    private String firebaseId;
-
-    public String getFirebaseId() {
-        return firebaseId;
-    }
-
-    public void setFirebaseId(String firebaseId) {
-        this.firebaseId = firebaseId;
-    }
-
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 }
-
-

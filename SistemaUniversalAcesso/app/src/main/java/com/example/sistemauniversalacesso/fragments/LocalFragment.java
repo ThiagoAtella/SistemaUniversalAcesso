@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,12 +38,9 @@ public class LocalFragment extends Fragment {
     }
 
     private void carregarLocais() {
-        new Thread(() -> {
-            List<LocalAcesso> locais = FirebaseService.listarLocais();
-
-            // Atualiza a UI na thread principal
-            requireActivity().runOnUiThread(() -> {
-                // Inicializa o adapter com a lista de locais
+        FirebaseService.listarLocais(new FirebaseService.FirebaseDataCallback<List<LocalAcesso>>() {
+            @Override
+            public void onComplete(List<LocalAcesso> locais) {
                 adapter = new LocalAdapter(locais, new LocalAdapter.LocalCallback() {
                     @Override
                     public void onEditar(LocalAcesso local) {
@@ -52,15 +49,18 @@ public class LocalFragment extends Fragment {
 
                     @Override
                     public void onDeletar(LocalAcesso local) {
-                        deletarLocal(local);
+                        confirmarDelecao(local);
                     }
                 });
-                // Configura o RecyclerView com o adapter
                 binding.recyclerLocais.setAdapter(adapter);
-            });
-        }).start();
-    }
+            }
 
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "Erro ao carregar locais: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void mostrarDialogAdicionarLocal() {
         DialogEditarLocalBinding dialogBinding = DialogEditarLocalBinding.inflate(getLayoutInflater());
@@ -68,8 +68,8 @@ public class LocalFragment extends Fragment {
                 .setTitle("Adicionar Local")
                 .setView(dialogBinding.getRoot())
                 .setPositiveButton("Salvar", (dialog, which) -> {
-                    String nome = dialogBinding.etNomeLocal.getText().toString();
-                    String endereco = dialogBinding.etEndereco.getText().toString();
+                    String nome = dialogBinding.etNomeLocal.getText().toString().trim();
+                    String endereco = dialogBinding.etEndereco.getText().toString().trim();
                     String tipo = dialogBinding.spTipo.getSelectedItem().toString();
                     String capacidadeStr = dialogBinding.etCapacidade.getText().toString();
                     boolean exigePagamento = dialogBinding.cbPagamento.isChecked();
@@ -80,20 +80,21 @@ public class LocalFragment extends Fragment {
                     }
 
                     int capacidade = Integer.parseInt(capacidadeStr);
-                    LocalAcesso novoLocal = new LocalAcesso(UUID.randomUUID().toString(), nome, tipo, capacidade, endereco, exigePagamento);
+                    // O ID será gerado pelo FirebaseService se for um novo local
+                    LocalAcesso novoLocal = new LocalAcesso(null, nome, tipo, capacidade, endereco, exigePagamento);
 
-                    new Thread(() -> {
-                        FirebaseService.salvarLocal(novoLocal);
-                        requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(requireContext(), "Local cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                    FirebaseService.salvarLocal(novoLocal, (success, message) -> {
+                        if (success) {
+                            Toast.makeText(getContext(), "Local salvo com sucesso!", Toast.LENGTH_SHORT).show();
                             carregarLocais();
-                        });
-                    }).start();
+                        } else {
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
-
 
     private void mostrarDialogEdicao(LocalAcesso local) {
         DialogEditarLocalBinding dialogBinding = DialogEditarLocalBinding.inflate(getLayoutInflater());
@@ -101,48 +102,61 @@ public class LocalFragment extends Fragment {
         dialogBinding.etNomeLocal.setText(local.getNome());
         dialogBinding.etEndereco.setText(local.getEndereco());
         dialogBinding.etCapacidade.setText(String.valueOf(local.getCapacidade()));
+        dialogBinding.cbPagamento.setChecked(local.isExigePagamento());
 
-        // Define o tipo de local selecionado
-        String[] tipos = getResources().getStringArray(R.array.tipos_local);
-        for (int i = 0; i < tipos.length; i++) {
-            if (tipos[i].equals(local.getTipo())) {
+        // Configura o spinner
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(requireContext(),
+                R.array.tipos_local, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dialogBinding.spTipo.setAdapter(spinnerAdapter);
+        for (int i = 0; i < spinnerAdapter.getCount(); i++) {
+            if (spinnerAdapter.getItem(i).toString().equals(local.getTipo())) {
                 dialogBinding.spTipo.setSelection(i);
                 break;
             }
         }
 
-        dialogBinding.cbPagamento.setChecked(local.isExigePagamento());
-
         new AlertDialog.Builder(requireContext())
                 .setTitle("Editar Local")
                 .setView(dialogBinding.getRoot())
                 .setPositiveButton("Salvar", (dialog, which) -> {
-                    local.setNome(dialogBinding.etNomeLocal.getText().toString());
-                    local.setEndereco(dialogBinding.etEndereco.getText().toString());
+                    local.setNome(dialogBinding.etNomeLocal.getText().toString().trim());
+                    local.setEndereco(dialogBinding.etEndereco.getText().toString().trim());
                     local.setTipo(dialogBinding.spTipo.getSelectedItem().toString());
                     local.setCapacidade(Integer.parseInt(dialogBinding.etCapacidade.getText().toString()));
                     local.setExigePagamento(dialogBinding.cbPagamento.isChecked());
 
-                    new Thread(() -> {
-                        FirebaseService.atualizarLocal(local);
-                        requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(requireContext(), "Local atualizado", Toast.LENGTH_SHORT).show();
+                    FirebaseService.atualizarLocal(local, (success, message) -> {
+                        if (success) {
+                            Toast.makeText(getContext(), "Local atualizado!", Toast.LENGTH_SHORT).show();
                             carregarLocais();
-                        });
-                    }).start();
+                        } else {
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
 
+    private void confirmarDelecao(LocalAcesso local) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Deletar Local")
+                .setMessage("Tem certeza que deseja deletar o local '" + local.getNome() + "'?")
+                .setPositiveButton("Deletar", (dialog, which) -> deletarLocal(local))
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
     private void deletarLocal(LocalAcesso local) {
-        new Thread(() -> {
-            FirebaseService.excluirLocal(local.getId());
-            requireActivity().runOnUiThread(() -> {
-                Toast.makeText(requireContext(), "Local deletado", Toast.LENGTH_SHORT).show();
+        FirebaseService.excluirLocal(local.getId(), (success, message) -> {
+            if (success) {
+                Toast.makeText(getContext(), "Local deletado", Toast.LENGTH_SHORT).show();
                 carregarLocais();
-            });
-        }).start();
+            } else {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

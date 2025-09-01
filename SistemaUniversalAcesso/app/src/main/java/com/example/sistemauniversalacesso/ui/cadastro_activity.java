@@ -1,20 +1,24 @@
 package com.example.sistemauniversalacesso.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sistemauniversalacesso.database.SistemaDatabase;
 import com.example.sistemauniversalacesso.databinding.CadastroBinding;
-import com.example.sistemauniversalacesso.database.FirebaseService;
 import com.example.sistemauniversalacesso.models.Usuario;
-import com.example.sistemauniversalacesso.utils.PasswordUtils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class cadastro_activity extends AppCompatActivity {
 
     private CadastroBinding binding;
-    private SistemaDatabase db;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +26,12 @@ public class cadastro_activity extends AppCompatActivity {
         binding = CadastroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = SistemaDatabase.getInstance(this);
+        // Inicializa o Firebase Auth e Firestore
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        binding.btnCadastrar.setOnClickListener(v -> realizarCadastro());
-        binding.btnVoltar.setOnClickListener(v -> voltarLogin());
+        binding.btnCadastrar.setOnClickListener(v -> realizarCadastroFirebase());
+        binding.btnVoltar.setOnClickListener(v -> finish()); // Simplificado
     }
 
     private boolean isEmailValido(String email) {
@@ -33,15 +39,18 @@ public class cadastro_activity extends AppCompatActivity {
     }
 
     private boolean isSenhaSegura(String senha) {
+        // A senha precisa ter no mínimo 6 caracteres para o Firebase Auth,
+        // mas manter sua validação mais forte é uma ótima prática.
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return senha.matches(regex);
     }
 
-    private void realizarCadastro() {
+    private void realizarCadastroFirebase() {
         String nome = binding.etNome.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String senha = binding.etSenha.getText().toString();
 
+        // --- Validações Iniciais (iguais às que você já tinha) ---
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
@@ -57,42 +66,52 @@ public class cadastro_activity extends AppCompatActivity {
             return;
         }
 
-        new Thread(() -> {
-            int emailExists = db.UsuarioDao().checkEmailExists(email);
-
-            if (emailExists > 0) {
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Email já cadastrado", Toast.LENGTH_SHORT).show()
-                );
-                return;
-            }
-
-            // Criptografar senha
-            String senhaCriptografada = PasswordUtils.generateSecurePassword(senha);
-            Usuario novoUsuario = new Usuario(nome, email, senhaCriptografada, "adm");
-
-            // Inserir no Room
-            db.UsuarioDao().inserir(novoUsuario);
-
-            // Inserir no Firebase (de forma assíncrona, mas com feedback)
-            new Thread(() -> {
-                String resultadoFirebase = FirebaseService.inserirUsuario(novoUsuario);
-                runOnUiThread(() -> {
-                    Toast.makeText(this, resultadoFirebase, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "Enviado para Firebase!", Toast.LENGTH_SHORT).show();
+        // --- Passo 1: Criar o usuário no Firebase Authentication ---
+        mAuth.createUserWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Autenticação bem-sucedida, agora salvamos os dados no Firestore
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        if (firebaseUser != null) {
+                            String uid = firebaseUser.getUid();
+                            salvarDadosUsuarioFirestore(uid, nome, email);
+                        }
+                    } else {
+                        // Se o cadastro falhar (ex: email já existe), exibe uma mensagem.
+                        Toast.makeText(cadastro_activity.this, "Falha no cadastro: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
                 });
-            }).start();
-
-            runOnUiThread(() -> {
-                Toast.makeText(this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            });
-
-        }).start();
     }
 
-    private void voltarLogin() {
-        startActivity(new Intent(this, login_activity.class));
-        finish();
+    private void salvarDadosUsuarioFirestore(String uid, String nome, String email) {
+        // --- Passo 2: Criar o objeto Usuario com os dados padrão ---
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setNome(nome);
+        novoUsuario.setEmail(email);
+
+        // Preenchendo os campos novos com valores padrão
+        novoUsuario.setAvatar("avatar1"); // Um avatar padrão
+        novoUsuario.setTipo("admin_view"); // Ou o tipo padrão para novos usuários
+        novoUsuario.setCanEditUsers(false); // Permissão padrão
+        novoUsuario.setMaster(false); // Permissão padrão
+
+        // Gerando a data de cadastro atual
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String dataAtual = sdf.format(new Date());
+        novoUsuario.setDataCadastro(dataAtual);
+
+        // --- Passo 3: Salvar o objeto no Firestore usando o UID como ID do documento ---
+        db.collection("users").document(uid)
+                .set(novoUsuario)
+                .addOnSuccessListener(aVoid -> {
+                    // Sucesso ao salvar no Firestore
+                    Toast.makeText(cadastro_activity.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                    finish(); // Volta para a tela anterior (login)
+                })
+                .addOnFailureListener(e -> {
+                    // Falha ao salvar no Firestore
+                    Toast.makeText(cadastro_activity.this, "Erro ao salvar dados: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
