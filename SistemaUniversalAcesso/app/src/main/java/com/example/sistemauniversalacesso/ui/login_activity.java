@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sistemauniversalacesso.databinding.LoginBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.SessionManager;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,11 +25,15 @@ public class login_activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         session = new SessionManager(this);
         mAuth = FirebaseAuth.getInstance();
@@ -37,7 +42,6 @@ public class login_activity extends AppCompatActivity {
         // Verifica se o usuário já está logado no Firebase Auth
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
-            finish();
             return;
         }
 
@@ -92,35 +96,48 @@ public class login_activity extends AppCompatActivity {
     }
 
     private void buscarDadosDoUsuarioEIniciarSessao(String uid) {
-        // --- Passo 2: Buscar os dados adicionais (nome, tipo) do Firestore ---
         db.collection("users").document(uid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            // Converte o documento do Firestore para o nosso objeto Usuario
-                            Usuario usuarioLogado = document.toObject(Usuario.class);
+
+                            // --- CORREÇÃO APLICADA AQUI ---
+                            // Em vez de converter o objeto inteiro, pegamos cada campo
+                            // e garantimos que ele não seja nulo, fornecendo um valor padrão.
+
+                            String nome = document.getString("nome");
+                            if (nome == null || nome.isEmpty()) {
+                                nome = "Usuário"; // Valor padrão caso o nome seja nulo ou vazio
+                            }
+
+                            String email = document.getString("email");
+                            if (email == null) {
+                                email = ""; // Valor padrão
+                            }
+
+                            String tipo = document.getString("tipo");
+                            if (tipo == null || tipo.isEmpty()) {
+                                tipo = "user"; // Valor padrão importante, para evitar erros de permissão
+                            }
+
+                            // Usamos as variáveis seguras (não-nulas) para salvar na sessão
+                            final String nomeFinal = nome;
+                            final String emailFinal = email;
+                            final String tipoFinal = tipo;
 
                             // Atraso para a animação ser exibida
                             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                                // Salva os dados na sessão local
-                                session.salvarSessao(
-                                        usuarioLogado.getNome(),
-                                        usuarioLogado.getEmail(),
-                                        usuarioLogado.getTipo() // Usando o campo 'tipo' correto
-                                );
-
+                                session.salvarSessao(nomeFinal, emailFinal, tipoFinal);
                                 startActivity(new Intent(this, MainActivity.class));
                                 finish();
                             }, 1500); // 1.5 segundos de delay
 
                         } else {
-                            // Caso estranho: usuário autenticado mas sem dados no Firestore
                             showErrorAnimation();
-                            Toast.makeText(this, "Dados do usuário não encontrados.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Dados do usuário não encontrados no banco.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        // Falha ao buscar dados
                         showErrorAnimation();
                         Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show();
                     }
