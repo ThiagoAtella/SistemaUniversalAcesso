@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "157889751347",
+    "firebase_url": "https://sua-2899a-default-rtdb.firebaseio.com",
+    "project_id": "sua-2899a",
+    "storage_bucket": "sua-2899a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157889751347:android:d37751642a717bea14b646",
+        "android_client_info": {
+          "package_name": "com.example.sistemauniversalacesso"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMDpvPDjK7F1icitKnP6JDlcg65rlT_cE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
