@@ -1,6 +1,5 @@
 package com.example.sistemauniversalacesso.fragments;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.sistemauniversalacesso.databinding.FragmentPerfilBinding;
 import com.example.sistemauniversalacesso.ui.login_activity;
 import com.example.sistemauniversalacesso.utils.SessionManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PerfilFragment extends Fragment {
 
@@ -42,17 +42,19 @@ public class PerfilFragment extends Fragment {
         });
 
         // Clique no botão de sair
-        binding.btnLogout.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireContext())
-                    .setTitle("Sair da conta")
-                    .setMessage("Deseja realmente sair?")
-                    .setPositiveButton("Sim", (dialog, which) -> {
-                        session.logout();
-                        startActivity(new Intent(requireContext(), login_activity.class));
-                        requireActivity().finish();
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Faz logout no Firebase
+                FirebaseAuth.getInstance().signOut();
+
+                // Redireciona para a tela de login
+                Intent intent = new Intent(requireActivity(), login_activity.class);
+                startActivity(intent);
+
+                // Finaliza a activity atual para evitar voltar com o botão de "voltar"
+                requireActivity().finish();
+            }
         });
     }
 

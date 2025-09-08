@@ -19,9 +19,14 @@ import com.example.sistemauniversalacesso.databinding.FragmentUsuariosBinding;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -52,35 +57,44 @@ public class UsuariosFragment extends Fragment {
     }
 
     private void carregarUsuarios() {
-        FirebaseService.listarUsuarios(new FirebaseService.FirebaseDataCallback<List<Usuario>>() {
-            @Override
-            public void onComplete(List<Usuario> usuarios) {
-                adapter = new UsuarioAdapter(usuarios, new UsuarioAdapter.UsuarioCallback() {
+        FirebaseDatabase.getInstance().getReference("users")
+                .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onEditar(Usuario usuario) {
-                        mostrarDialogEdicao(usuario);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Usuario> usuarios = new ArrayList<>();
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            Usuario usuario = userSnapshot.getValue(Usuario.class);
+                            if (usuario != null) {
+                                usuario.setUid(userSnapshot.getKey()); // pega o UID
+                                usuarios.add(usuario);
+                            }
+                        }
+                        adapter = new UsuarioAdapter(usuarios, new UsuarioAdapter.UsuarioCallback() {
+                            @Override
+                            public void onEditar(Usuario usuario) {
+                                mostrarDialogEdicao(usuario);
+                            }
+
+                            @Override
+                            public void onDeletar(Usuario usuario) {
+                                confirmarDelecao(usuario);
+                            }
+                        });
+                        binding.recyclerUsuarios.setAdapter(adapter);
                     }
 
                     @Override
-                    public void onDeletar(Usuario usuario) {
-                        confirmarDelecao(usuario);
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(), "Erro: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                binding.recyclerUsuarios.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Toast.makeText(getContext(), "Erro ao carregar usuários: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void mostrarDialogAdicionarUsuario() {
         DialogEditarUsuarioBinding dialogBinding = DialogEditarUsuarioBinding.inflate(getLayoutInflater());
 
-        // ALTERAÇÃO: Esconde o campo de senha, pois será gerada automaticamente
-        dialogBinding.etSenha.setVisibility(View.GONE);
+        // 👉 Agora a senha aparece para o admin preencher
+        dialogBinding.etSenha.setVisibility(View.VISIBLE);
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("Adicionar Novo Usuário")
@@ -88,17 +102,15 @@ public class UsuariosFragment extends Fragment {
                 .setPositiveButton("Salvar", (dialog, which) -> {
                     String nome = dialogBinding.etNome.getText().toString().trim();
                     String email = dialogBinding.etEmail.getText().toString().trim();
+                    String senha = dialogBinding.etSenha.getText().toString();
                     String tipo = dialogBinding.spNivel.getSelectedItem().toString();
 
-                    if (nome.isEmpty() || email.isEmpty()) {
-                        Toast.makeText(requireContext(), "Preencha nome e e-mail", Toast.LENGTH_SHORT).show();
+                    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                        Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    // GERA UMA SENHA TEMPORÁRIA AUTOMATICAMENTE
-                    String senhaTemporaria = gerarSenhaTemporaria();
-
-                    mAuth.createUserWithEmailAndPassword(email, senhaTemporaria)
+                    mAuth.createUserWithEmailAndPassword(email, senha)
                             .addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     FirebaseUser firebaseUser = task.getResult().getUser();
@@ -108,24 +120,27 @@ public class UsuariosFragment extends Fragment {
                                     novoUsuario.setNome(nome);
                                     novoUsuario.setEmail(email);
                                     novoUsuario.setTipo(tipo);
-                                    novoUsuario.setAvatar("avatar_default");
+                                    novoUsuario.setAvatar("avatar1");
                                     novoUsuario.setCanEditUsers(false);
                                     novoUsuario.setMaster(false);
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                                    novoUsuario.setDataCadastro(sdf.format(new Date()));
 
-                                    FirebaseService.salvarDadosUsuario(uid, novoUsuario, (success, message) -> {
-                                        if (success) {
-                                            // Mostra a senha gerada para o admin
-                                            mostrarSenhaTemporaria(senhaTemporaria);
-                                            carregarUsuarios();
-                                        } else {
-                                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                                    novoUsuario.setData_cadastro(sdf.format(new Date()));
+
+                                    // 🚀 Salva no Realtime Database
+                                    FirebaseDatabase.getInstance().getReference("users")
+                                            .child(uid)
+                                            .setValue(novoUsuario)
+                                            .addOnSuccessListener(aVoid -> {
+                                                Toast.makeText(getContext(), "Usuário criado com sucesso!", Toast.LENGTH_LONG).show();
+                                                carregarUsuarios(); // Atualiza lista
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Toast.makeText(getContext(), "Erro ao salvar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            });
 
                                 } else {
-                                    Toast.makeText(getContext(), "Falha ao criar autenticação: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Falha: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
                 })
@@ -190,36 +205,6 @@ public class UsuariosFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    /**
-     * Gera uma senha aleatória e segura para o novo usuário.
-     */
-    private String gerarSenhaTemporaria() {
-        String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
-        String CHAR_UPPER = CHAR_LOWER.toUpperCase();
-        String NUMBER = "0123456789";
-        String OTHER_CHAR = "!@#$%&*_";
-        String PASSWORD_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(10);
-        for (int i = 0; i < 10; i++) {
-            int rndCharAt = random.nextInt(PASSWORD_ALLOW_BASE.length());
-            char rndChar = PASSWORD_ALLOW_BASE.charAt(rndCharAt);
-            sb.append(rndChar);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Mostra um diálogo com a senha temporária para o admin.
-     */
-    private void mostrarSenhaTemporaria(String senha) {
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Usuário Criado com Sucesso!")
-                .setMessage("A senha temporária para este usuário é:\n\n" + senha + "\n\nPor favor, anote e informe ao usuário. Ele poderá alterá-la depois.")
-                .setPositiveButton("OK", null)
-                .show();
     }
 
     @Override

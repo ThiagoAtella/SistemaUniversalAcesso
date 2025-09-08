@@ -1,83 +1,62 @@
 package com.example.sistemauniversalacesso.models;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-import com.google.firebase.firestore.Exclude;
-import com.google.firebase.firestore.PropertyName;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
-@Entity(tableName = "usuarios")
+@IgnoreExtraProperties
+@Entity
 public class Usuario {
 
-    @PrimaryKey(autoGenerate = true)
-    @Exclude // Impede que este campo seja enviado para o Firebase
-    private int id;
-
-    @Exclude // O ID do documento do Firebase é a chave, não um campo dentro dele
-    private String uid; // Para armazenar o ID do documento do Firebase (ex: "0rmonzzecKNx...")
-
-    // --- Campos que correspondem ao Firebase ---
-
-    @ColumnInfo(name = "avatar")
-    private String avatar;
-
-    @PropertyName("can_edit_users") // Mapeia o campo "can_edit_users" do Firebase
-    @ColumnInfo(name = "can_edit_users")
-    private boolean canEditUsers;
-
-    @PropertyName("data_cadastro") // Mapeia o campo "data_cadastro" do Firebase
-    @ColumnInfo(name = "data_cadastro")
-    private String dataCadastro;
-
-    @ColumnInfo(name = "email")
-    private String email;
-
-    @PropertyName("is_master") // Mapeia o campo "is_master" do Firebase
-    @ColumnInfo(name = "is_master")
-    private boolean isMaster;
-
-    @ColumnInfo(name = "nome")
+    private String uid;
     private String nome;
+    private String email;
+    private String avatar;
+    private String tipo;
+    private boolean can_edit_users;
+    private boolean is_master;
+    private String data_cadastro;
 
-    @ColumnInfo(name = "tipo")
-    private String tipo; // Campo "nivel" foi renomeado para "tipo"
-
-    // Construtor vazio (essencial para o Firebase)
     public Usuario() {}
 
-    // --- Getters e Setters ---
-
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
+    @PropertyName("uid")
     public String getUid() { return uid; }
+    @PropertyName("uid")
     public void setUid(String uid) { this.uid = uid; }
 
-    public String getAvatar() { return avatar; }
-    public void setAvatar(String avatar) { this.avatar = avatar; }
-
-    @PropertyName("can_edit_users")
-    public boolean isCanEditUsers() { return canEditUsers; }
-    @PropertyName("can_edit_users")
-    public void setCanEditUsers(boolean canEditUsers) { this.canEditUsers = canEditUsers; }
-
-    @PropertyName("data_cadastro")
-    public String getDataCadastro() { return dataCadastro; }
-    @PropertyName("data_cadastro")
-    public void setDataCadastro(String dataCadastro) { this.dataCadastro = dataCadastro; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    @PropertyName("is_master")
-    public boolean isMaster() { return isMaster; }
-    @PropertyName("is_master")
-    public void setMaster(boolean master) { isMaster = master; }
-
+    @PropertyName("nome")
     public String getNome() { return nome; }
+    @PropertyName("nome")
     public void setNome(String nome) { this.nome = nome; }
 
+    @PropertyName("email")
+    public String getEmail() { return email; }
+    @PropertyName("email")
+    public void setEmail(String email) { this.email = email; }
+
+    @PropertyName("avatar")
+    public String getAvatar() { return avatar; }
+    @PropertyName("avatar")
+    public void setAvatar(String avatar) { this.avatar = avatar; }
+
+    @PropertyName("tipo")
     public String getTipo() { return tipo; }
+    @PropertyName("tipo")
     public void setTipo(String tipo) { this.tipo = tipo; }
+
+    @PropertyName("can_edit_users")
+    public boolean isCanEditUsers() { return can_edit_users; }
+    @PropertyName("can_edit_users")
+    public void setCanEditUsers(boolean can_edit_users) { this.can_edit_users = can_edit_users; }
+
+    @PropertyName("is_master")
+    public boolean isMaster() { return is_master; }
+    @PropertyName("is_master")
+    public void setMaster(boolean is_master) { this.is_master = is_master; }
+
+    @PropertyName("data_cadastro")
+    public String getData_Cadastro() { return data_cadastro; }
+    @PropertyName("data_cadastro")
+    public void setData_cadastro(String data_cadastro) { this.data_cadastro = data_cadastro; }
 }

@@ -1,146 +1,138 @@
 package com.example.sistemauniversalacesso.ui;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
-import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sistemauniversalacesso.databinding.LoginBinding;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.example.sistemauniversalacesso.R;
 import com.example.sistemauniversalacesso.models.Usuario;
 import com.example.sistemauniversalacesso.utils.SessionManager;
-import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class login_activity extends AppCompatActivity {
 
-    private LoginBinding binding;
-    private SessionManager session;
+    private EditText editTextEmail, editTextPassword;
+    private Button buttonLogin;
+    private Button buttonCadastro;  // botão para cadastro
+    private ProgressBar progressBar;
+
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
+    private DatabaseReference mDatabase;
 
-
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(this);
-        binding = LoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.login);
 
-
-        session = new SessionManager(this);
+        // Inicializa o Firebase Auth e Database
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // Verifica se o usuário já está logado no Firebase Auth
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            return;
-        }
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonCadastro = findViewById(R.id.buttonCadastro); // pega o botão do XML
+        progressBar = findViewById(R.id.progressBar);
 
-        binding.btnLogin.setOnClickListener(v -> realizarLoginFirebase());
-        binding.btnCadastro.setOnClickListener(v -> {
-            startActivity(new Intent(this, cadastro_activity.class));
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser();
+            }
+        });
+
+        buttonCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(login_activity.this, cadastro_activity.class);
+                startActivity(intent);
+            }
         });
     }
 
-    private boolean isEmailValido(String email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
+    private void loginUser() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
-    private void showSuccessAnimation() {
-        binding.lottieSuccess.setVisibility(View.VISIBLE);
-        binding.lottieSuccess.playAnimation();
-    }
-
-    private void showErrorAnimation() {
-        binding.lottieError.setVisibility(View.VISIBLE);
-        binding.lottieError.playAnimation();
-    }
-
-    private void realizarLoginFirebase() {
-        String email = binding.etEmail.getText().toString().trim();
-        String senha = binding.etSenha.getText().toString();
-
-        if (email.isEmpty() || senha.isEmpty()) {
-            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+        if (email.isEmpty()) {
+            editTextEmail.setError("E-mail é obrigatório");
+            editTextEmail.requestFocus();
             return;
         }
 
-        if (!isEmailValido(email)) {
-            binding.etEmail.setError("Email inválido");
+        if (password.isEmpty()) {
+            editTextPassword.setError("Senha é obrigatória");
+            editTextPassword.requestFocus();
             return;
         }
 
-        // --- Passo 1: Autenticar o usuário com Firebase Auth ---
-        mAuth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Login bem-sucedido, agora buscamos os dados do usuário no Firestore
-                        showSuccessAnimation();
-                        buscarDadosDoUsuarioEIniciarSessao(task.getResult().getUser().getUid());
-                    } else {
-                        // Falha no login
-                        showErrorAnimation();
-                        Toast.makeText(login_activity.this, "Usuário ou senha inválidos.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+        progressBar.setVisibility(View.VISIBLE);
 
-    private void buscarDadosDoUsuarioEIniciarSessao(String uid) {
-        db.collection("users").document(uid).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-
-                            // --- CORREÇÃO APLICADA AQUI ---
-                            // Em vez de converter o objeto inteiro, pegamos cada campo
-                            // e garantimos que ele não seja nulo, fornecendo um valor padrão.
-
-                            String nome = document.getString("nome");
-                            if (nome == null || nome.isEmpty()) {
-                                nome = "Usuário"; // Valor padrão caso o nome seja nulo ou vazio
-                            }
-
-                            String email = document.getString("email");
-                            if (email == null) {
-                                email = ""; // Valor padrão
-                            }
-
-                            String tipo = document.getString("tipo");
-                            if (tipo == null || tipo.isEmpty()) {
-                                tipo = "user"; // Valor padrão importante, para evitar erros de permissão
-                            }
-
-                            // Usamos as variáveis seguras (não-nulas) para salvar na sessão
-                            final String nomeFinal = nome;
-                            final String emailFinal = email;
-                            final String tipoFinal = tipo;
-
-                            // Atraso para a animação ser exibida
-                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                                session.salvarSessao(nomeFinal, emailFinal, tipoFinal);
-                                startActivity(new Intent(this, MainActivity.class));
-                                finish();
-                            }, 1500); // 1.5 segundos de delay
-
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Login com sucesso, agora busca os dados do usuário
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            fetchUserData(firebaseUser.getUid());
                         } else {
-                            showErrorAnimation();
-                            Toast.makeText(this, "Dados do usuário não encontrados no banco.", Toast.LENGTH_SHORT).show();
+                            // Se o login falhar, mostra uma mensagem ao usuário.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(login_activity.this, "Autenticação falhou.",
+                                    Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
-                    } else {
-                        showErrorAnimation();
-                        Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void fetchUserData(String userId) {
+        // O caminho no banco de dados é "usuarios/{userId}"
+        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.GONE);
+                if (dataSnapshot.exists()) {
+                    Usuario user = dataSnapshot.getValue(Usuario.class);
+                    if (user != null) {
+                        Toast.makeText(login_activity.this, "Bem-vindo, " + user.getNome() + "!", Toast.LENGTH_LONG).show();
+                        SessionManager session = new SessionManager(login_activity.this);
+                        session.salvarSessao(user.getNome(), user.getEmail(), user.getTipo());
+                        Intent intent = new Intent(login_activity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                } else {
+                    Toast.makeText(login_activity.this, "Dados do usuário não encontrados.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+                Log.w(TAG, "loadUser:onCancelled", databaseError.toException());
+                Toast.makeText(login_activity.this, "Falha ao ler dados do usuário.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
