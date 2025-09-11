@@ -36,7 +36,11 @@ public class TelaRestritaFragment extends Fragment {
 
             if (item.getItemId() == R.id.nav_perfil) {
                 selectedFragment = new PerfilFragment();
-            } else if (item.getItemId() == R.id.nav_qrcode) {
+            }
+            else if (item.getItemId() == R.id.nav_solicitacao){
+                selectedFragment = new SolicitarCredencialFragment();
+            }
+            else if (item.getItemId() == R.id.nav_qrcode) {
                 selectedFragment = new QrFragment();
             }
 

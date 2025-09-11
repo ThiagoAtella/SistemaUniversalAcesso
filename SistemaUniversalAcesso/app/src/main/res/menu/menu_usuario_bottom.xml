@@ -7,4 +7,8 @@
         android:id="@+id/nav_qrcode"
         android:title="QR Code"
         android:icon="@drawable/ic_qr" />
+    <item
+        android:id="@+id/nav_solicitacao"
+        android:title="Solicitação"
+        android:icon="@drawable/ic_solicitacao"/>
 </menu>

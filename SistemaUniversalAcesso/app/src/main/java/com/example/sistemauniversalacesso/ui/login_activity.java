@@ -50,7 +50,7 @@ public class login_activity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
-        buttonCadastro = findViewById(R.id.buttonCadastro); // pega o botão do XML
+        buttonCadastro = findViewById(R.id.buttonCadastro);
         progressBar = findViewById(R.id.progressBar);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
