@@ -15,4 +15,11 @@
     </string-array>
 
 
+        <string-array name="tipos_de_credencial">
+            <item>Selecione o tipo...</item>
+            <item>QR Code</item>
+            <item>NFC</item>
+        </string-array>
+
+
 </resources>

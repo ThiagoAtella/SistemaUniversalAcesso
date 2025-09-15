@@ -89,37 +89,10 @@ public class FirebaseService {
                 .addOnFailureListener(callback::onFailure);
     }
 
-    /**
-     * Salva um novo local ou sobrescreve um existente com o mesmo ID.
-     */
-    public static void salvarLocal(LocalAcesso local, final FirebaseCallback callback) {
-        String id = local.getId();
-        if (id == null || id.isEmpty()) {
-            // Se o local é novo, o Firestore gera um ID automaticamente
-            id = getDb().collection("locais").document().getId();
-            local.setId(id);
-        }
-
-        getDb().collection("locais").document(id)
-                .set(local)
-                .addOnSuccessListener(aVoid -> callback.onComplete(true, "Local salvo com sucesso."))
-                .addOnFailureListener(e -> callback.onComplete(false, "Erro ao salvar local: " + e.getMessage()));
-    }
-
-    /**
-     * Exclui um local de acesso pelo seu ID.
-     */
     public static void excluirLocal(String localId, final FirebaseCallback callback) {
         getDb().collection("locais").document(localId).delete()
                 .addOnSuccessListener(aVoid -> callback.onComplete(true, "Local excluído com sucesso."))
                 .addOnFailureListener(e -> callback.onComplete(false, "Erro ao excluir local: " + e.getMessage()));
     }
-    // Adicione este método dentro da sua classe FirebaseService.java
 
-    public static void atualizarLocal(LocalAcesso local, final FirebaseCallback callback) {
-        getDb().collection("locais").document(local.getId())
-                .set(local, SetOptions.merge()) // Usamos merge para não sobrescrever dados desnecessariamente
-                .addOnSuccessListener(aVoid -> callback.onComplete(true, "Local atualizado com sucesso."))
-                .addOnFailureListener(e -> callback.onComplete(false, "Erro ao atualizar local: " + e.getMessage()));
-    }
 }

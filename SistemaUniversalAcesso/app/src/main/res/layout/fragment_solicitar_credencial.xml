@@ -1,38 +1,32 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <Spinner
+        android:id="@+id/spTipo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:entries="@array/tipos_de_credencial"
+        android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/etLocalAcesso"
-            android:hint="Local de acesso (ex: estacionamento)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etJustificativa"
+        android:hint="Digite a justificativa..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="3"
+        android:inputType="textMultiLine"/>
 
-        <EditText
-            android:id="@+id/etTipo"
-            android:hint="Tipo de credencial (ex: QR Code)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <Spinner
+        android:id="@+id/spLocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/etJustificativa"
-            android:hint="Justificativa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minLines="3"
-            android:gravity="top"/>
-
-        <Button
-            android:id="@+id/btnEnviar"
-            android:text="Enviar Solicitação"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/btnEnviar"
+        android:text="Solicitar Credencial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
