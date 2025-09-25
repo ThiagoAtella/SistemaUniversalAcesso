@@ -23,6 +23,8 @@
             android:exported="false"/>
         <activity android:name=".ui.MainActivity"
             android:exported="false"/>
+        <activity android:name=".ui.VisualizarQrCodeActivity"
+            android:exported="false"/>
 
 
     </application>
